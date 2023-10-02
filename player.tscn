@@ -12,7 +12,7 @@ script = ExtResource("1_goxgi")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0.968627, 0.368627, 0.552941, 1)
+color = Color(0.980392, 0.0941176, 0.505882, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(20, 20)
