@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=6 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player.tscn" id="1_4phlm"]
+[ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://creeper.tscn" id="2_hbyw4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1161"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6o613"]
 size = Vector2(1152, 20)
@@ -13,6 +16,7 @@ size = Vector2(20, 666.5)
 [node name="Level" type="Node2D" parent="."]
 
 [node name="LevelBoundaries" type="StaticBody2D" parent="Level"]
+physics_material_override = SubResource("PhysicsMaterial_d1161")
 
 [node name="TopBondary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
 position = Vector2(576, -12)
@@ -36,3 +40,6 @@ debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
 position = Vector2(253, 113)
+
+[node name="Creeper" parent="." instance=ExtResource("2_hbyw4")]
+position = Vector2(584, 294)
