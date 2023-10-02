@@ -1,7 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=4 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player.tscn" id="1_4phlm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o613"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dj024"]
+size = Vector2(20, 666.5)
+
 [node name="Main Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_4phlm")]
+[node name="Level" type="Node2D" parent="."]
+
+[node name="LevelBoundaries" type="StaticBody2D" parent="Level"]
+
+[node name="TopBondary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
+position = Vector2(576, -12)
+shape = SubResource("RectangleShape2D_6o613")
+debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
+
+[node name="BottomBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
+position = Vector2(576, 659)
+shape = SubResource("RectangleShape2D_6o613")
+debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
+
+[node name="LeftBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
+position = Vector2(-10, 333.75)
+shape = SubResource("RectangleShape2D_dj024")
+debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
+
+[node name="RightBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
+position = Vector2(1162, 335)
+shape = SubResource("RectangleShape2D_dj024")
+debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
+
+[node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
+position = Vector2(253, 113)
