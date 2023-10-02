@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=9 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player.tscn" id="1_4phlm"]
 [ext_resource type="Script" path="res://main_game.gd" id="1_e2vps"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://gun.tscn" id="2_be4gn"]
 [ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://creeper.tscn" id="2_hbyw4"]
 [ext_resource type="Script" path="res://Level.gd" id="2_igq84"]
-[ext_resource type="PackedScene" uid="uid://dui5plxsf52a" path="res://bullet.tscn" id="4_q44qj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1161"]
 
@@ -54,7 +53,5 @@ position = Vector2(253, 113)
 
 [node name="Creeper" parent="." instance=ExtResource("2_hbyw4")]
 position = Vector2(584, 294)
-
-[node name="Bullet" parent="." instance=ExtResource("4_q44qj")]
 
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
