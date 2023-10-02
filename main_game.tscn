@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://deqtmks54a4u7"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_s4knf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
+
+[node name="Main Game" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_s4knf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_lmx7v")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.968627, 0.368627, 0.552941, 1)
