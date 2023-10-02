@@ -4,14 +4,11 @@
 size = Vector2(5, 5)
 
 [node name="Bullet" type="RigidBody2D"]
-position = Vector2(118, 93)
-gravity_scale = 2.66454e-15
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_top = 35.0
 offset_right = 5.0
-offset_bottom = 40.0
+offset_bottom = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.5, 37.5)
+position = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_jlx3j")

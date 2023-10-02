@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://eyt6qixfequa"]
+
+[ext_resource type="Script" path="res://Gun.gd" id="1_x85ng"]
+
+[node name="Gun" type="Node"]
+script = ExtResource("1_x85ng")
+
+[node name="BulletSpawner" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="BulletSpawner" to="." method="_on_bullet_spawner_timeout"]

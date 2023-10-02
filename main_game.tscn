@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=10 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player.tscn" id="1_4phlm"]
+[ext_resource type="Script" path="res://main_game.gd" id="1_e2vps"]
+[ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://gun.tscn" id="2_be4gn"]
 [ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://creeper.tscn" id="2_hbyw4"]
-[ext_resource type="Script" path="res://Gun.gd" id="2_jqwt4"]
+[ext_resource type="Script" path="res://Level.gd" id="2_igq84"]
+[ext_resource type="PackedScene" uid="uid://dui5plxsf52a" path="res://bullet.tscn" id="4_q44qj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1161"]
 
@@ -13,11 +16,13 @@ size = Vector2(1152, 20)
 size = Vector2(20, 666.5)
 
 [node name="Main Game" type="Node2D"]
+script = ExtResource("1_e2vps")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 323)
 
 [node name="Level" type="Node2D" parent="."]
+script = ExtResource("2_igq84")
 
 [node name="LevelBoundaries" type="StaticBody2D" parent="Level"]
 physics_material_override = SubResource("PhysicsMaterial_d1161")
@@ -45,8 +50,11 @@ debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
 position = Vector2(253, 113)
 
-[node name="Gun" type="Node" parent="Level/Player"]
-script = ExtResource("2_jqwt4")
+[node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 
 [node name="Creeper" parent="." instance=ExtResource("2_hbyw4")]
 position = Vector2(584, 294)
+
+[node name="Bullet" parent="." instance=ExtResource("4_q44qj")]
+
+[connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
