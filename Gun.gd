@@ -1,8 +1,11 @@
 extends Node
-
+enum GUN_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 signal gun_was_fired(bullet: RigidBody2D)
 
-var speed = 1200
+@export var speed:int  = 1200
+@export var gunDirection: GUN_DIRECTION = GUN_DIRECTION.RIGHT 
+
+const gunFrontPosition: int = 50
 
 func _ready() -> void:
 	pass 
@@ -11,15 +14,36 @@ func _process(delta: float) -> void:
 	pass
 
 func shoot() -> void:
-	var gunFrontPosition = 50
-	
 	var bullet: RigidBody2D = preload('res://bullet.tscn').instantiate()	
-	var direction: Vector2 = Vector2(1, 0)
-	var gunfirePosition: Vector2 = get_parent().position + Vector2(gunFrontPosition, 0)
+	var bullet_direction: Vector2 = bullet_direction(gunDirection)
+	var gunfireStartPosition: Vector2 = get_parent().position + gun_position(gunDirection)
 	
-	bullet.linear_velocity = direction.normalized() * speed
-	bullet.global_position = gunfirePosition
+	bullet.linear_velocity = bullet_direction.normalized() * speed
+	bullet.global_position = gunfireStartPosition
 	gun_was_fired.emit(bullet)
+	
+func bullet_direction(gunDirection: GUN_DIRECTION) -> Vector2:
+	return gun_front_direction_to_vector2(1, gunDirection)
 
+func gun_position(gunDirection: GUN_DIRECTION) -> Vector2:
+	return gun_front_direction_to_vector2(gunFrontPosition, gunDirection)
+	
+func gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION) -> Vector2:
+	var resultVector: Vector2;
+	match(gunFrontDirection):
+		GUN_DIRECTION.LEFT: 
+			resultVector = Vector2(-force, 0);
+		GUN_DIRECTION.TOP:
+			resultVector = Vector2(0, -force);
+		GUN_DIRECTION.RIGHT:
+			resultVector = Vector2(force, 0);
+		GUN_DIRECTION.BOTTOM:
+			resultVector = Vector2(0, force)
+	return resultVector;
+			
 func _on_bullet_spawner_timeout() -> void:
 	shoot()	
+
+
+func _on_player_changed_direction(PLAYER_DIRECTION):
+	gunDirection = PLAYER_DIRECTION;

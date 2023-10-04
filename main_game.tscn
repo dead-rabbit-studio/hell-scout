@@ -50,8 +50,10 @@ debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 position = Vector2(253, 113)
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
+gunDirection = 3
 
-[node name="Creeper" parent="." instance=ExtResource("2_hbyw4")]
+[node name="Creeper" parent="Level" instance=ExtResource("2_hbyw4")]
 position = Vector2(584, 294)
 
+[connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
