@@ -1,8 +1,14 @@
 extends CharacterBody2D
 enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
+
 signal changed_direction(PLAYER_DIRECTION)
-const SPEED = 400.0
+@export var SPEED = 400.0
+
 var lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
+@onready var animatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+
+func _ready() -> void : 
+	animatedSprite.play("idle")
 
 func _physics_process(delta: float) -> void:
 	var directionVector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -10,11 +16,24 @@ func _physics_process(delta: float) -> void:
 	print_debug(str(playerDirection) + " " + str(directionVector))	
 
 	if playerDirection != lastDirection:
-		print_debug("Player changed direction")
 		lastDirection = playerDirection
 		changed_direction.emit(lastDirection)
 		
 	velocity = directionVector * SPEED
+	print_debug('VELOCTY: ' + str(directionVector.length()))
+	
+
+	if velocity.length() > 0:
+		animatedSprite.play('running')
+	else: 
+		animatedSprite.play('idle')
+		
+	if directionVector.x > 0:
+		animatedSprite.scale.x = 1
+	elif directionVector.x < 0:
+		animatedSprite.scale.x = -1
+		
+		
 	move_and_slide()
 
 func direction_vector_to_player_direction(directionVector: Vector2) -> PLAYER_DIRECTION: 
