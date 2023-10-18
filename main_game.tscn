@@ -17,6 +17,13 @@ size = Vector2(20, 666.5)
 [node name="Main Game" type="Node2D"]
 script = ExtResource("1_e2vps")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 396.0
+offset_top = 183.0
+offset_right = 756.0
+offset_bottom = 449.0
+color = Color(0.913725, 0.913725, 0.913725, 1)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(577, 323)
 
@@ -27,27 +34,28 @@ script = ExtResource("2_igq84")
 physics_material_override = SubResource("PhysicsMaterial_d1161")
 
 [node name="TopBondary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
-position = Vector2(576, -12)
+position = Vector2(590, 193)
 shape = SubResource("RectangleShape2D_6o613")
 debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="BottomBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
-position = Vector2(576, 659)
+position = Vector2(606, 453)
 shape = SubResource("RectangleShape2D_6o613")
 debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="LeftBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
-position = Vector2(-10, 333.75)
+position = Vector2(407, 345)
 shape = SubResource("RectangleShape2D_dj024")
 debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="RightBoundary" type="CollisionShape2D" parent="Level/LevelBoundaries"]
-position = Vector2(1162, 335)
+position = Vector2(747, 317)
 shape = SubResource("RectangleShape2D_dj024")
 debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
-position = Vector2(253, 113)
+position = Vector2(450, 232)
+SPEED = 200.0
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 gunDirection = 3
