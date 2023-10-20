@@ -7,25 +7,19 @@ signal gun_was_fired(bullet: RigidBody2D)
 
 const gunFrontPosition: int = 50
 
-func _ready() -> void:
-	pass 
-
-func _process(delta: float) -> void:
-	pass
-
 func shoot() -> void:
 	var bullet: RigidBody2D = preload('res://bullet.tscn').instantiate()	
-	var bullet_direction: Vector2 = bullet_direction(gunDirection)
-	var gunfireStartPosition: Vector2 = get_parent().position + gun_position(gunDirection)
+	var bullet_direction: Vector2 = get_bullet_direction()
+	var gunfireStartPosition: Vector2 = get_parent().position + gun_position()
 	
 	bullet.linear_velocity = bullet_direction.normalized() * speed
 	bullet.global_position = gunfireStartPosition
 	gun_was_fired.emit(bullet)
 	
-func bullet_direction(gunDirection: GUN_DIRECTION) -> Vector2:
+func get_bullet_direction() -> Vector2:
 	return gun_front_direction_to_vector2(1, gunDirection)
 
-func gun_position(gunDirection: GUN_DIRECTION) -> Vector2:
+func gun_position() -> Vector2:
 	return gun_front_direction_to_vector2(gunFrontPosition, gunDirection)
 	
 func gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION) -> Vector2:

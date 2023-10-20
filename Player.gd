@@ -10,7 +10,7 @@ var lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
 func _ready() -> void : 
 	animatedSprite.play("idle")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var directionVector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var playerDirection = direction_vector_to_player_direction(directionVector)
 	print_debug(str(playerDirection) + " " + str(directionVector))	
