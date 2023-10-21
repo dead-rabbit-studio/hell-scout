@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player.tscn" id="1_4phlm"]
 [ext_resource type="Script" path="res://main_game.gd" id="1_e2vps"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://gun.tscn" id="2_be4gn"]
-[ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://creeper.tscn" id="2_hbyw4"]
 [ext_resource type="Script" path="res://Level.gd" id="2_igq84"]
+[ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://Creeper.tscn" id="5_vywd2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1161"]
 
@@ -60,8 +60,9 @@ SPEED = 200.0
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 gunDirection = 3
 
-[node name="Creeper" parent="Level" instance=ExtResource("2_hbyw4")]
-position = Vector2(584, 294)
+[node name="Creeper" parent="." instance=ExtResource("5_vywd2")]
+position = Vector2(550, 271)
 
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
+[connection signal="player_position_update" from="Level/Player" to="Creeper" method="_on_player_player_position_update"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
