@@ -8,7 +8,7 @@ signal gun_was_fired(bullet: RigidBody2D)
 const gunFrontPosition: int = 50
 
 func shoot() -> void:
-	var bullet: RigidBody2D = preload('res://bullet.tscn').instantiate()	
+	var bullet: RigidBody2D = preload('res://weapons/bullet.tscn').instantiate()
 	var bullet_direction: Vector2 = get_bullet_direction()
 	var gunfireStartPosition: Vector2 = get_parent().position + gun_position()
 	
