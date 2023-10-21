@@ -5,37 +5,49 @@ signal changed_direction(PLAYER_DIRECTION)
 signal player_position_update(Vector2)
 
 @onready var animatedSprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health: Health = $Health 
 
-@export var SPEED = 400.0
+@export var speed = 400.0
+@export var max_health = 110
 
 var _currentDirectionVector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
 
 func _ready() -> void : 
+	health.max = max_health
 	animatedSprite.play("idle")
 
 func _process(delta: float) -> void:
-	animate()
-	update_sprite_direction()
+	if health.is_alive:
+		health.damage(10 * delta)
+		print_debug(health.current)
+		animate()
+		update_sprite_direction()
 
 func _physics_process(_delta: float) -> void:
+	if health.is_alive:
+		move_player()
+	
+func move_player():
 	_currentDirectionVector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var playerDirection = map_direction_vector_to_player_direction(_currentDirectionVector)
+	var playerDirection: PLAYER_DIRECTION = map_direction_vector_to_player_direction(_currentDirectionVector)
 
 	if playerDirection != _lastDirection:
 		_lastDirection = playerDirection
 		changed_direction.emit(_lastDirection)
 		
-	velocity = _currentDirectionVector * SPEED
-		
+	velocity = _currentDirectionVector * speed
 	move_and_slide()
 	player_position_update.emit(global_position)
 	
 func animate():
-	if velocity.length() > 0:
-		animatedSprite.play('running')
-	else: 
-		animatedSprite.play('idle')	
+	if  health.is_alive:
+		if velocity.length() > 0:
+			animatedSprite.play('running')
+		else: 
+			animatedSprite.play('idle')	
+	else:
+		animatedSprite.pause()
 		
 func update_sprite_direction():
 	if _currentDirectionVector.x > 0:
@@ -56,3 +68,6 @@ func map_direction_vector_to_player_direction(directionVector: Vector2) -> PLAYE
 		playerDirection = PLAYER_DIRECTION.BOTTOM
 	
 	return playerDirection; 
+
+func _on_health_depleted():
+	print_debug("player has died")
