@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 1.5
+@export var speed: float = 300
 @export var line_of_sight_size: float = 80.0
 
 @onready var line_of_sight_area =  $Area2D/CollisionShape2D.shape as CircleShape2D
@@ -11,16 +11,16 @@ var player_los: bool = false
 func _process(delta: float) -> void:
 	line_of_sight_area.radius = line_of_sight_size
 
-func _physics_process(_delta: float) -> void:
-	follow_player()
+func _physics_process(delta: float) -> void:
+	follow_player(delta)
 	
-func follow_player() -> void: 
+func follow_player(delta: float) -> void: 
 	if player_los:
 		var distance_from_player_vector: Vector2 = playerPosition - global_position
 		var direction: Vector2 = distance_from_player_vector.normalized()
 		var distanceLenght: float = abs(distance_from_player_vector.length())
 		
-		var movement: Vector2 = direction * speed
+		var movement: Vector2 = direction * (speed * delta)
 		
 		if distanceLenght > 30:
 			move_and_collide(movement)

@@ -68,6 +68,8 @@ gunDirection = 3
 
 [node name="Creeper" parent="." instance=ExtResource("5_vywd2")]
 position = Vector2(550, 271)
+speed = 80.0
+line_of_sight_size = 150.035
 
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
 [connection signal="player_position_update" from="Level/Player" to="Creeper" method="_on_player_player_position_update"]
