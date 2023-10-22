@@ -12,6 +12,17 @@ func _on_mob_spawner_timeout() -> void:
 	
 func spawn_creeper() -> void:
 	var creeper: Creeper = CreeperClass.instantiate()
-	creeper.position = player.global_position
+	creeper.position = get_spawn_position_inside_area(player.global_position, 50) 
 	player.player_position_update.connect(creeper._on_player_player_position_update)
 	add_child(creeper)
+	
+func get_spawn_position_inside_area(center_of_area:Vector2, radius: float) -> Vector2:
+	var player_position = player.global_position
+	var center_y = player_position.y    
+	
+	var random_angle = randf() * PI * 2
+	
+	var x = player_position.x + radius * cos(random_angle)
+	var y = player_position.y + radius * sin(random_angle)
+	
+	return Vector2(x, y)
