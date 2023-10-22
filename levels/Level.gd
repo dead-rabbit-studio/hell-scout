@@ -8,15 +8,15 @@ func _on_gun_gun_was_fired(bullet: RigidBody2D) -> void:
 
 func _on_mob_spawner_timeout() -> void:
 	print_debug("new enemy added")
-	spawn_creeper()
+	_spawn_creeper()
 	
-func spawn_creeper() -> void:
+func _spawn_creeper() -> void:
 	var creeper: Creeper = CreeperClass.instantiate()
-	creeper.position = get_spawn_position_inside_area(player.global_position, 50) 
+	creeper.position = _get_spawn_position_inside_area(player.global_position, 50) 
 	player.player_position_update.connect(creeper._on_player_player_position_update)
 	add_child(creeper)
 	
-func get_spawn_position_inside_area(center_of_area:Vector2, radius: float) -> Vector2:
+func _get_spawn_position_inside_area(center_of_area:Vector2, radius: float) -> Vector2:
 	var player_position = player.global_position
 	var center_y = player_position.y    
 	
