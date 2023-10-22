@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xse6umb621tq"]
+[gd_scene load_steps=17 format=3 uid="uid://xse6umb621tq"]
 
 [ext_resource type="Script" path="res://player/scouter/Player.gd" id="1_opm3m"]
 [ext_resource type="Texture2D" uid="uid://oa5xbbpt1qcs" path="res://player/scouter/scouter_spritesheet2.png" id="2_go48k"]
@@ -90,6 +90,9 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7tgf"]
+size = Vector2(18, 47.5)
+
 [node name="Player" type="CharacterBody2D"]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
@@ -106,4 +109,11 @@ frame_progress = 0.234539
 
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
 
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_b7tgf")
+debug_color = Color(0.898039, 0.270588, 0.439216, 0.419608)
+
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
