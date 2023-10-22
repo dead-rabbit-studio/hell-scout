@@ -38,6 +38,5 @@ func gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION
 func _on_bullet_spawner_timeout() -> void:
 	shoot()	
 
-
 func _on_player_changed_direction(PLAYER_DIRECTION):
 	gunDirection = PLAYER_DIRECTION;

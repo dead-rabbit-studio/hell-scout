@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 
 signal changed_direction(PLAYER_DIRECTION)
@@ -14,7 +14,8 @@ var _currentDirectionVector: Vector2 = Vector2.ZERO
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
 
 func _ready() -> void : 
-	health.max = max_health
+	health.max_health = max_health
+	health.is_mortal = false
 	animatedSprite.play("idle")
 
 func _process(delta: float) -> void:

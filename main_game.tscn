@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=8 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
 [ext_resource type="Script" path="res://levels/Level.gd" id="2_igq84"]
-[ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://npcs/creeper/creeper.tscn" id="5_vywd2"]
 
 [sub_resource type="GDScript" id="GDScript_36clq"]
 script/source = "extends Node2D
@@ -61,15 +60,15 @@ debug_color = Color(0.647059, 0.407843, 0.835294, 0.419608)
 
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
 position = Vector2(450, 232)
+collision_mask = 3
+speed = 250.0
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 gunDirection = 3
 
-[node name="Creeper" parent="." instance=ExtResource("5_vywd2")]
-position = Vector2(550, 271)
-speed = 80.0
-line_of_sight_size = 150.035
+[node name="MobSpawner" type="Timer" parent="Level"]
+autostart = true
 
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
-[connection signal="player_position_update" from="Level/Player" to="Creeper" method="_on_player_player_position_update"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
+[connection signal="timeout" from="Level/MobSpawner" to="Level" method="_on_mob_spawner_timeout"]

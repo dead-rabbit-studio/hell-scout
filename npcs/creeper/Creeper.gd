@@ -1,15 +1,27 @@
-extends CharacterBody2D
+class_name Creeper extends CharacterBody2D
 
-@export var speed: float = 300
-@export var line_of_sight_size: float = 80.0
+const NODE_NAME = "Creeper"
 
-@onready var line_of_sight_area =  $Area2D/CollisionShape2D.shape as CircleShape2D
+@export var speed: float = 80
+@export var line_of_sight_size: float = 150.0
+@export var max_health: float = 80.0
+
+@onready var line_of_sight_area: CircleShape2D =  $EngageArea/CollisionShape2D.shape as CircleShape2D
+@onready var collisionShape: CollisionShape2D = $CollisionShape2D
+@onready var health: Health = $Health
 
 var playerPosition: Vector2
 var player_los: bool = false
 
+func _ready() -> void:
+	set_collision_layer_value(1, false)
+	set_collision_mask_value(1, true)
+	
 func _process(delta: float) -> void:
-	line_of_sight_area.radius = line_of_sight_size
+	if health.is_alive:
+		line_of_sight_area.radius = line_of_sight_size
+		health.damage(10 * delta)
+		print_debug("enemy_health:" + str(health.current))
 
 func _physics_process(delta: float) -> void:
 	follow_player(delta)
@@ -25,15 +37,19 @@ func follow_player(delta: float) -> void:
 		if distanceLenght > 30:
 			move_and_collide(movement)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_player_player_position_update(new_player_position: Vector2) -> void:
+	playerPosition = new_player_position
+
+func _on_health_depleted() -> void:
+	queue_free()
+	print_debug("enemy_died")
+
+func _on_engage_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		player_los = true	
-		print_debug("player_entered")
 		playerPosition = body.global_position
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_engage_area_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		player_los = false
 
-func _on_player_player_position_update(new_player_position: Vector2) -> void:
-	playerPosition = new_player_position
