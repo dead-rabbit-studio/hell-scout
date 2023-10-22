@@ -20,13 +20,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if health.is_alive:
 		line_of_sight_area.radius = line_of_sight_size
-		health.damage(10 * delta)
-		print_debug("enemy_health:" + str(health.current))
 
 func _physics_process(delta: float) -> void:
 	follow_player(delta)
 	
 func follow_player(delta: float) -> void: 
+	const personal_space_area = 30
 	if player_los:
 		var distance_from_player_vector: Vector2 = playerPosition - global_position
 		var direction: Vector2 = distance_from_player_vector.normalized()
@@ -34,7 +33,7 @@ func follow_player(delta: float) -> void:
 		
 		var movement: Vector2 = direction * (speed * delta)
 		
-		if distanceLenght > 30:
+		if distanceLenght > personal_space_area:
 			move_and_collide(movement)
 
 func _on_player_player_position_update(new_player_position: Vector2) -> void:
