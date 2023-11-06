@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://1p83a06qvtuw"]
+
+[ext_resource type="Script" path="res://weapons/melee_attack.gd" id="1_i0l7d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7tgf"]
+size = Vector2(18, 47.5)
+
+[node name="MeleeAttack" type="Area2D"]
+script = ExtResource("1_i0l7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b7tgf")
+debug_color = Color(0.898039, 0.270588, 0.439216, 0.419608)
