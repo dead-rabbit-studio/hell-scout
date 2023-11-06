@@ -3,9 +3,9 @@ enum GUN_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 signal gun_was_fired(bullet: RigidBody2D)
 
 @export var speed:int  = 1200
-@export var gunDirection: GUN_DIRECTION = GUN_DIRECTION.RIGHT 
+@export var gun_direction: GUN_DIRECTION = GUN_DIRECTION.RIGHT 
 
-const gunFrontPosition: int = 50
+const gun_front_position: int = 50
 
 func _shoot() -> void:
 	var bullet: RigidBody2D = preload('res://weapons/bullet.tscn').instantiate()
@@ -17,10 +17,10 @@ func _shoot() -> void:
 	gun_was_fired.emit(bullet)
 	
 func _get_bullet_direction() -> Vector2:
-	return _gun_front_direction_to_vector2(1, gunDirection)
+	return _gun_front_direction_to_vector2(1, gun_direction)
 
 func _gun_position() -> Vector2:
-	return _gun_front_direction_to_vector2(gunFrontPosition, gunDirection)
+	return _gun_front_direction_to_vector2(gun_front_position, gun_direction)
 	
 func _gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION) -> Vector2:
 	var resultVector: Vector2;
@@ -39,4 +39,4 @@ func _on_bullet_spawner_timeout() -> void:
 	_shoot()	
 
 func _on_player_changed_direction(PLAYER_DIRECTION):
-	gunDirection = PLAYER_DIRECTION;
+	gun_direction = PLAYER_DIRECTION;
