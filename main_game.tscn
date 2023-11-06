@@ -64,7 +64,6 @@ collision_mask = 3
 speed = 250.0
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
-gunDirection = 3
 
 [node name="MobSpawner" type="Timer" parent="Level"]
 autostart = true

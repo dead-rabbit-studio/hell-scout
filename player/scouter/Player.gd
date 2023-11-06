@@ -6,19 +6,20 @@ signal player_position_update(Vector2)
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health: Health = $Health 
-@onready var attack_area = $AttackArea
-@onready var attack_area_shape: RectangleShape2D = $AttackArea/CollisionShape2D.shape as RectangleShape2D
 
 @export var speed = 400.0
 @export var max_health = 110
 
 var _currentDirectionVector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
+var melee_attack: Area2D
 
 func _ready() -> void : 
+	melee_attack = preload("res://weapons/melee_attack.tscn").instantiate()
 	health.max_health = max_health
 	health.is_mortal = false
-	remove_child(attack_area)
+	connect("changed_direction", melee_attack._on_player_changed_direction)
+	connect("player_position_update", melee_attack._on_player_position_update)
 
 func _process(delta: float) -> void:
 	if health.is_alive:
@@ -28,10 +29,10 @@ func _process(delta: float) -> void:
 		_update_sprite_direction()
 		
 		if Input.is_action_pressed('attack'):
-			_calculate_attack_direction(_lastDirection)
-			add_child(attack_area)
+			add_child(melee_attack)
+			melee_attack.attack()
 		else:
-			remove_child(attack_area)
+			remove_child(melee_attack)
 
 func _physics_process(_delta: float) -> void:
 	if health.is_alive:
@@ -77,25 +78,13 @@ func _map_direction_vector_to_player_direction(directionVector: Vector2) -> PLAY
 		playerDirection = PLAYER_DIRECTION.BOTTOM
 	
 	return playerDirection; 
-
-func _calculate_attack_direction(player_direction: PLAYER_DIRECTION) -> void:
-	var attack_distance =  (attack_area_shape.extents.x * attack_area_shape.extents.y) / 10
-	
-	match(player_direction):
-		PLAYER_DIRECTION.LEFT:
-			attack_area.global_position = global_position + Vector2(-attack_distance, 0)
-		PLAYER_DIRECTION.TOP:
-			attack_area.global_position = global_position + Vector2(0, -attack_distance)
-		PLAYER_DIRECTION.RIGHT:
-			attack_area.global_position = global_position + Vector2(attack_distance, 0)
-		PLAYER_DIRECTION.BOTTOM:
-			attack_area.global_position = global_position + Vector2(0, attack_distance)	
 			
 func _on_health_depleted():
 	print_debug("player has died")
 
-func _on_attack_area_body_entered(body: Node2D) -> void:
+func _on_melee_attack_body_entered(body: Node2D) -> void:
 	const damage = 10
 	if body.has_node('Health'): 
 		body.health.damage(damage)
 		print_debug("player dealt: " + str(damage))
+
