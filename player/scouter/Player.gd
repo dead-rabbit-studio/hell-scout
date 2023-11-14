@@ -60,6 +60,7 @@ func _animate():
 		animated_sprite.pause()
 		
 func _update_sprite_direction():
+	#TODO: use sprite.flip
 	if _currentDirectionVector.x > 0:
 		animated_sprite.scale.x = 1
 	elif _currentDirectionVector.x < 0:
