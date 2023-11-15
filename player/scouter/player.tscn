@@ -102,7 +102,6 @@ shape = SubResource("RectangleShape2D_lmx7v")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dpvev")
 animation = &"running"
-frame_progress = 0.234539
 
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
 
