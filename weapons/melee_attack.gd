@@ -9,23 +9,42 @@ var player_position: Vector2 = Vector2.ZERO
 func attack() -> void:
 	const melee_attack_vertical_size = Vector2(64, 32)
 	const melee_attack_horizontal_size = Vector2(32, 64)
+	var flip_h = false
+	var flip_v = false
 
 	match attack_direction:
 		ATTACK_DIRECTION.LEFT:
 			_set_attack_position(Vector2(-melee_attack_horizontal_size.x + 10, 0))
 			_set_attack_shape(melee_attack_horizontal_size)
-			_attack_vfx.flip_h = true
+			_attack_vfx.rotation = 0
+			flip_h = true
+			
+			
 		ATTACK_DIRECTION.TOP:
 			_set_attack_position(Vector2(0, -melee_attack_vertical_size.y / 2))
 			_set_attack_shape(melee_attack_vertical_size)
-			_attack_vfx.rotate(-180)
+			_attack_vfx.rotation = -90
+			_attack_vfx.flip_v = false
+			flip_v = true
+			
+			
 		ATTACK_DIRECTION.RIGHT:
 			_set_attack_position(Vector2(melee_attack_horizontal_size.x - 10 , 0))
 			_set_attack_shape(melee_attack_horizontal_size)
-			_attack_vfx.flip_h = false
+			_attack_vfx.rotation = 0
+			flip_h = false
+			
+			
 		ATTACK_DIRECTION.BOTTOM:
 			_set_attack_position(Vector2(0, 24))
 			_set_attack_shape(melee_attack_vertical_size)
+			_attack_vfx.rotation = 90
+			flip_v = true
+	
+	_attack_vfx.flip_h = flip_h
+	_attack_vfx.flip_v = flip_v
+			
+			
 			
 	_attack_vfx.play("attack")
 
