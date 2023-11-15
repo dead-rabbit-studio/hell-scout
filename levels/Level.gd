@@ -8,7 +8,7 @@ func _on_gun_gun_was_fired(bullet: RigidBody2D) -> void:
 
 func _on_mob_spawner_timeout() -> void:
 	print_debug("new enemy added")
-	_spawn_creeper()
+#	_spawn_creeper()
 	
 func _spawn_creeper() -> void:
 	var creeper: Creeper = CreeperClass.instantiate()

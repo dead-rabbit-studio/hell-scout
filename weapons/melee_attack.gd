@@ -3,6 +3,7 @@ class_name MeleeAttack extends Area2D
 enum ATTACK_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 @export var attack_direction: ATTACK_DIRECTION = ATTACK_DIRECTION.RIGHT
 @onready var melee_area_shape: RectangleShape2D = $CollisionShape2D.shape as RectangleShape2D
+@onready var _attack_vfx = $AttackVfx
 var player_position: Vector2 = Vector2.ZERO
 
 func attack() -> void:
@@ -13,15 +14,20 @@ func attack() -> void:
 		ATTACK_DIRECTION.LEFT:
 			_set_attack_position(Vector2(-melee_attack_horizontal_size.x + 10, 0))
 			_set_attack_shape(melee_attack_horizontal_size)
+			_attack_vfx.flip_h = true
 		ATTACK_DIRECTION.TOP:
 			_set_attack_position(Vector2(0, -melee_attack_vertical_size.y / 2))
 			_set_attack_shape(melee_attack_vertical_size)
+			_attack_vfx.rotate(-180)
 		ATTACK_DIRECTION.RIGHT:
 			_set_attack_position(Vector2(melee_attack_horizontal_size.x - 10 , 0))
 			_set_attack_shape(melee_attack_horizontal_size)
+			_attack_vfx.flip_h = false
 		ATTACK_DIRECTION.BOTTOM:
 			_set_attack_position(Vector2(0, 24))
 			_set_attack_shape(melee_attack_vertical_size)
+			
+	_attack_vfx.play("attack")
 
 func _set_attack_position(new_position: Vector2) -> void:
 	global_position = player_position + new_position

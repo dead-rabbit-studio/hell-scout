@@ -1,10 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://m42vso1w6gqq"]
+[gd_scene load_steps=12 format=3 uid="uid://m42vso1w6gqq"]
 
 [ext_resource type="Script" path="res://weapons/melee_attack.gd" id="1_i0l7d"]
-[ext_resource type="Texture2D" uid="uid://b3fwbfo4itwyt" path="res://icon.png" id="2_3lguh"]
+[ext_resource type="Texture2D" uid="uid://b7f7ledx7eh33" path="res://weapons/melee-attack-vfx.png" id="2_ererg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7tgf"]
 size = Vector2(18, 47.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhnwy"]
+atlas = ExtResource("2_ererg")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw7c6"]
+atlas = ExtResource("2_ererg")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_casym"]
+atlas = ExtResource("2_ererg")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41ms5"]
+atlas = ExtResource("2_ererg")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jo1r"]
+atlas = ExtResource("2_ererg")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j864c"]
+atlas = ExtResource("2_ererg")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioh64"]
+atlas = ExtResource("2_ererg")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7yqwb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhnwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw7c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_casym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41ms5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jo1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j864c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioh64")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 14.0
+}]
 
 [node name="MeleeAttack" type="Area2D"]
 script = ExtResource("1_i0l7d")
@@ -13,7 +70,6 @@ script = ExtResource("1_i0l7d")
 shape = SubResource("RectangleShape2D_b7tgf")
 debug_color = Color(0.894118, 0.192157, 0.639216, 0.419608)
 
-[node name="AttackVfx" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3lguh")
+[node name="AttackVfx" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7yqwb")
+animation = &"attack"
