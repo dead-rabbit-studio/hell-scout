@@ -10,6 +10,8 @@ const NODE_NAME = "Creeper"
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 @onready var health: Health = $Health
 
+signal player_was_hit(float)
+
 var playerPosition: Vector2
 var player_los: bool = false
 
@@ -35,6 +37,10 @@ func follow_player(delta: float) -> void:
 		
 		if distanceLenght > personal_space_area:
 			move_and_collide(movement)
+			
+func take_damage() -> void: 
+	health.damage(100)
+	print_debug("enemy health" + str(health.current))
 
 func _on_player_player_position_update(new_player_position: Vector2) -> void:
 	playerPosition = new_player_position
@@ -52,3 +58,9 @@ func _on_engage_area_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		player_los = false
 
+func _on_collision_shape_2d_child_entered_tree(node):
+	print_debug('Enemy Hit' + str(node))
+ 
+func _on_hitbox_area_entered(area):
+	print_debug("Creeper hit the player")
+	player_was_hit.emit(30)

@@ -23,16 +23,18 @@ func _ready() -> void :
 
 func _process(delta: float) -> void:
 	if health.is_alive:
-		health.damage(10 * delta)
-		print_debug(health.current)
+#		health.damage(10 * delta)
+#		print_debug("Player health:" + str(health.current))
 		_animate()
 		_update_sprite_direction()
 		
 		if Input.is_action_pressed('attack'):
-			add_child(melee_attack)
-			melee_attack.attack()
+			if melee_attack.get_parent() == null:
+				add_child(melee_attack)
+				melee_attack.attack()
 		else:
-			remove_child(melee_attack)
+			if melee_attack.get_parent() != null:
+				remove_child(melee_attack)
 
 func _physics_process(_delta: float) -> void:
 	if health.is_alive:
@@ -60,11 +62,10 @@ func _animate():
 		animated_sprite.pause()
 		
 func _update_sprite_direction():
-	#TODO: use sprite.flip
 	if _currentDirectionVector.x > 0:
-		animated_sprite.scale.x = 1
+		animated_sprite.flip_h = false
 	elif _currentDirectionVector.x < 0:
-		animated_sprite.scale.x = -1
+		animated_sprite.flip_h = true
 
 func _map_direction_vector_to_player_direction(directionVector: Vector2) -> PLAYER_DIRECTION: 
 	var playerDirection: PLAYER_DIRECTION = _lastDirection;
@@ -84,8 +85,11 @@ func _on_health_depleted():
 	print_debug("player has died")
 
 func _on_melee_attack_body_entered(body: Node2D) -> void:
+	print_debug("player hit someone")
 	const damage = 10
 	if body.has_node('Health'): 
 		body.health.damage(damage)
 		print_debug("player dealt: " + str(damage))
+		
+
 

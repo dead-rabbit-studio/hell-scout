@@ -2,13 +2,16 @@ extends Node2D
 
 @onready var player: Player = $Player
 var CreeperClass = preload('res://npcs/creeper/creeper.tscn')
+		
+func _on_creeper_player_was_hit(damage: float) -> void:
+	print_debug("player took a hit: "  + str(damage))
 
 func _on_gun_gun_was_fired(bullet: RigidBody2D) -> void:
 	add_child(bullet) 
 
 func _on_mob_spawner_timeout() -> void:
 	print_debug("new enemy added")
-#	_spawn_creeper()
+	_spawn_creeper()
 	
 func _spawn_creeper() -> void:
 	var creeper: Creeper = CreeperClass.instantiate()

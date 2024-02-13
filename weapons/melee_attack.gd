@@ -44,8 +44,6 @@ func attack() -> void:
 	_attack_vfx.flip_h = flip_h
 	_attack_vfx.flip_v = flip_v
 			
-			
-			
 	_attack_vfx.play("attack")
 
 func _set_attack_position(new_position: Vector2) -> void:
