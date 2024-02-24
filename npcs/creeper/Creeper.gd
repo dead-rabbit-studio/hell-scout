@@ -5,6 +5,7 @@ const NODE_NAME = "Creeper"
 @export var speed: float = 80
 @export var line_of_sight_size: float = 150.0
 @export var max_health: float = 80.0
+@export var damage: float = 30.0
 
 @onready var line_of_sight_area: CircleShape2D =  $EngageArea/CollisionShape2D.shape as CircleShape2D
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
@@ -62,5 +63,5 @@ func _on_collision_shape_2d_child_entered_tree(node):
 	print_debug('Enemy Hit' + str(node))
  
 func _on_hitbox_area_entered(area):
-	print_debug("Creeper hit the player")
-	player_was_hit.emit(30)
+	print_debug("Creeper hit the player: " + str(damage))
+	player_was_hit.emit(damage)

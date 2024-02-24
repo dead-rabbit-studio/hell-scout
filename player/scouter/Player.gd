@@ -23,8 +23,6 @@ func _ready() -> void :
 
 func _process(delta: float) -> void:
 	if health.is_alive:
-#		health.damage(10 * delta)
-#		print_debug("Player health:" + str(health.current))
 		_animate()
 		_update_sprite_direction()
 		

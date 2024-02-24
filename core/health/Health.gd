@@ -19,7 +19,8 @@ func damage(damage_points: float):
 		if health_after_hit < 0: current = 0
 		else: current -= damage_points
 		
-		if current == 0 and is_mortal:
+		if current == 0 and !is_mortal:
+			print_debug("player has died")
 			is_alive = false
 			depleted.emit()
 	
