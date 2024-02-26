@@ -33,6 +33,8 @@ func _process(delta: float) -> void:
 		else:
 			if melee_attack.get_parent() != null:
 				remove_child(melee_attack)
+	else:
+		animated_sprite.pause()
 
 func _physics_process(_delta: float) -> void:
 	if health.is_alive:
@@ -51,13 +53,11 @@ func _move_player():
 	player_position_update.emit(global_position)
 	
 func _animate():
-	if  health.is_alive:
-		if velocity.length() > 0:
-			animated_sprite.play('running')
-		else: 
-			animated_sprite.play('idle')	
-	else:
-		animated_sprite.pause()
+	if velocity.length() > 0:
+		animated_sprite.play('running')
+	else: 
+		animated_sprite.play('idle')	
+
 		
 func _update_sprite_direction():
 	if _currentDirectionVector.x > 0:
