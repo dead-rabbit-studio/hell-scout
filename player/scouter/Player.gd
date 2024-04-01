@@ -3,6 +3,7 @@ enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 
 signal changed_direction(PLAYER_DIRECTION)
 signal player_position_update(Vector2)
+signal player_has_died
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health: Health = $Health 
@@ -17,7 +18,7 @@ var melee_attack: Area2D
 func _ready() -> void : 
 	melee_attack = preload("res://weapons/melee_attack.tscn").instantiate()
 	health.max_health = max_health
-	health.is_mortal = false
+	health.is_mortal = true
 	connect("changed_direction", melee_attack._on_player_changed_direction)
 	connect("player_position_update", melee_attack._on_player_position_update)
 
@@ -58,7 +59,6 @@ func _animate():
 	else: 
 		animated_sprite.play('idle')	
 
-		
 func _update_sprite_direction():
 	if _currentDirectionVector.x > 0:
 		animated_sprite.flip_h = false
@@ -79,15 +79,8 @@ func _map_direction_vector_to_player_direction(directionVector: Vector2) -> PLAY
 	
 	return playerDirection; 
 			
+func take_damage(damage: float):
+	health.damage(damage)
+	
 func _on_health_depleted():
 	print_debug("player has died")
-
-func _on_melee_attack_body_entered(body: Node2D) -> void:
-	print_debug("player hit someone")
-	const damage = 10
-	if body.has_node('Health'): 
-		body.health.damage(damage)
-		print_debug("player dealt: " + str(damage))
-		
-
-

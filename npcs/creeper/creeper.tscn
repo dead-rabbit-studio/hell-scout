@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://vmf48gd83jhq"]
+[gd_scene load_steps=8 format=3 uid="uid://vmf48gd83jhq"]
 
 [ext_resource type="Script" path="res://npcs/creeper/Creeper.gd" id="1_rs1m7"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="2_vvum0"]
+[ext_resource type="Script" path="res://core/HurtBox.gd" id="3_61h3e"]
+[ext_resource type="Script" path="res://core/HitBox.gd" id="4_212rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wbb6"]
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1m41k"]
 radius = 35.2278
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfocm"]
+size = Vector2(18, 18)
 
 [node name="Creeper" type="CharacterBody2D"]
 script = ExtResource("1_rs1m7")
@@ -20,7 +25,7 @@ color = Color(0.266667, 0.847059, 0.666667, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0wbb6")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
+debug_color = Color(0.835294, 0.207843, 0.807843, 0.419608)
 
 [node name="EngageArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -31,16 +36,25 @@ shape = SubResource("CircleShape2D_1m41k")
 
 [node name="Health" parent="." instance=ExtResource("2_vvum0")]
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("3_61h3e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0wbb6")
-debug_color = Color(0, 0.6, 0.701961, 0.419608)
+debug_color = Color(0.929412, 0.184314, 0.486275, 0.419608)
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("4_212rs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_dfocm")
 
 [connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
 [connection signal="body_entered" from="EngageArea" to="." method="_on_engage_area_body_entered"]
 [connection signal="body_exited" from="EngageArea" to="." method="_on_engage_area_body_exited"]
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="child_entered_tree" from="Hitbox/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="child_entered_tree" from="Hurtbox/CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]

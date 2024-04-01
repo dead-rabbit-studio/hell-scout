@@ -1,4 +1,4 @@
-class_name MeleeAttack extends Area2D
+class_name MeleeAttack extends HitBox
 
 enum ATTACK_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 @export var attack_direction: ATTACK_DIRECTION = ATTACK_DIRECTION.RIGHT
