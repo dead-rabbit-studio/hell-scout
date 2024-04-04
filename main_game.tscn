@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=9 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
@@ -7,8 +7,18 @@
 [sub_resource type="GDScript" id="GDScript_36clq"]
 script/source = "extends Node2D
 
+@onready var gameOverLabel:Label = $GUI/GameOverLabel
+
+func on_game_over(): 
+	gameOverLabel.visible = true
+
 func _on_gun_gun_was_fired(bullet: Node2D) -> void:
 	add_child(bullet)
+
+
+func _on_level_level_status_change(levelStatus: int) -> void:
+	if(levelStatus == LevelStatus.LOST):
+		on_game_over()
 "
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d1161"]
@@ -18,6 +28,9 @@ size = Vector2(1152, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj024"]
 size = Vector2(20, 666.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kfjol"]
+font_color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [node name="Main Game" type="Node2D"]
 script = SubResource("GDScript_36clq")
@@ -68,6 +81,23 @@ speed = 250.0
 [node name="MobSpawner" type="Timer" parent="Level"]
 autostart = true
 
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameOverLabel" type="Label" parent="GUI"]
+visible = false
+layout_mode = 0
+offset_left = 529.0
+offset_top = 309.0
+offset_right = 621.0
+offset_bottom = 335.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_kfjol")
+
+[connection signal="level_status_change" from="Level" to="." method="_on_level_level_status_change"]
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
 [connection signal="timeout" from="Level/MobSpawner" to="Level" method="_on_mob_spawner_timeout"]
