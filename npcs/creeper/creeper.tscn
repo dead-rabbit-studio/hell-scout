@@ -15,6 +15,7 @@ radius = 35.2278
 size = Vector2(18, 18)
 
 [node name="Creeper" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_rs1m7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -28,16 +29,18 @@ shape = SubResource("RectangleShape2D_0wbb6")
 debug_color = Color(0.835294, 0.207843, 0.807843, 0.419608)
 
 [node name="EngageArea" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EngageArea"]
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_1m41k")
 
 [node name="Health" parent="." instance=ExtResource("2_vvum0")]
+max_health = 40
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 4
 script = ExtResource("3_61h3e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -46,6 +49,7 @@ shape = SubResource("RectangleShape2D_0wbb6")
 debug_color = Color(0.929412, 0.184314, 0.486275, 0.419608)
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
 script = ExtResource("4_212rs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

@@ -64,7 +64,11 @@ animations = [{
 }]
 
 [node name="MeleeAttack" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+priority = -1
 script = ExtResource("1_i0l7d")
+damage = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b7tgf")

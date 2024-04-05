@@ -4,7 +4,7 @@ const NODE_NAME = "Creeper"
 
 @export var speed: float = 80
 @export var line_of_sight_size: float = 150.0
-@export var max_health: float = 80.0
+@export var max_health: float = 30.0
 @export var damage: float = 30.0
 
 @onready var line_of_sight_area: CircleShape2D =  $EngageArea/CollisionShape2D.shape as CircleShape2D
@@ -21,6 +21,8 @@ func die() -> void:
 func _ready() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, true)
+	health.current = max_health
+	print_debug("new creeper health:" + str(health.current))
 	
 func _process(delta: float) -> void:
 	if health.is_alive:

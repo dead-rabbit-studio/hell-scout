@@ -29,7 +29,7 @@ func _game_over() -> void:
 	print_debug("level finished")
 	level_status_change.emit(LevelStatus.LOST)
 	mob_spawner.stop()
-	_kill_all_mobs()
+	#_kill_all_mobs()
 	
 func _spawn_creeper() -> void:
 	var creeper: Creeper = CreeperClass.instantiate()
