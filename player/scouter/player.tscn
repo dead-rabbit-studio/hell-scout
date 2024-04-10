@@ -105,9 +105,11 @@ shape = SubResource("RectangleShape2D_lmx7v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dpvev")
-animation = &"running"
+animation = &"idle"
+frame_progress = 0.985444
 
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
+ignore_damage = true
 
 [node name="HurtBox" type="Area2D" parent="."]
 script = ExtResource("4_dq1gf")

@@ -2,7 +2,7 @@ class_name MeleeAttack extends HitBox
 
 enum ATTACK_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 @export var attack_direction: ATTACK_DIRECTION = ATTACK_DIRECTION.RIGHT
-@onready var melee_area_shape: RectangleShape2D = $CollisionShape2D.shape as RectangleShape2D
+@onready var melee_area_shape: RectangleShape2D = $HitBox.get_node("CollisionShape2D").shape as RectangleShape2D
 @onready var _attack_vfx = $AttackVfx
 var player_position: Vector2 = Vector2.ZERO
 
@@ -11,7 +11,7 @@ func attack() -> void:
 	const melee_attack_horizontal_size = Vector2(32, 64)
 	var flip_h = false
 	var flip_v = false
-
+	
 	match attack_direction:
 		ATTACK_DIRECTION.LEFT:
 			_set_attack_position(Vector2(-melee_attack_horizontal_size.x, 0))
@@ -27,13 +27,11 @@ func attack() -> void:
 			_attack_vfx.flip_v = false
 			flip_v = true
 			
-			
 		ATTACK_DIRECTION.RIGHT:
 			_set_attack_position(Vector2(melee_attack_horizontal_size.x, 0))
 			_set_attack_shape(melee_attack_horizontal_size)
 			_attack_vfx.rotation = 0
 			flip_h = false
-			
 			
 		ATTACK_DIRECTION.BOTTOM:
 			_set_attack_position(Vector2(0, melee_attack_vertical_size.y))
@@ -57,4 +55,8 @@ func _on_player_changed_direction(player_direction):
 	
 func _on_player_position_update(player_position_update: Vector2):
 	player_position = player_position_update 
-	
+
+func _on_attack_vfx_animation_finished() -> void:
+	print_debug("Animation finished")
+	_attack_vfx.pause() 
+	queue_free()

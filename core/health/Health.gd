@@ -4,8 +4,10 @@ signal depleted
 
 @export var is_alive = true
 @export var is_mortal = true
+@export var ignore_damage = false
 @export var max_health = 100
 @export var current: float = max_health
+
 	
 func heal(heal_points: float):
 	var health_after_heal = current + heal_points
