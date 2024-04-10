@@ -106,7 +106,7 @@ shape = SubResource("RectangleShape2D_lmx7v")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dpvev")
 animation = &"idle"
-frame_progress = 0.985444
+frame_progress = 0.394874
 
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
 ignore_damage = true
