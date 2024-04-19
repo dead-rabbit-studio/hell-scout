@@ -38,10 +38,11 @@ shape = SubResource("CircleShape2D_1m41k")
 [node name="Health" parent="." instance=ExtResource("2_vvum0")]
 max_health = 40
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("3_61h3e")
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(8, 8)

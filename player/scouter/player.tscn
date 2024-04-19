@@ -92,7 +92,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17k8b"]
-size = Vector2(16.5, 14)
+size = Vector2(19, 19)
 
 [node name="Player" type="CharacterBody2D"]
 platform_wall_layers = 51
@@ -111,11 +111,13 @@ frame_progress = 0.394874
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
 ignore_damage = true
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_mask = 4
 script = ExtResource("4_dq1gf")
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0.75, 5)
+position = Vector2(1, 6)
 shape = SubResource("RectangleShape2D_17k8b")
 
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
