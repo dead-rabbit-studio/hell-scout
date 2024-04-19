@@ -39,8 +39,7 @@ shape = SubResource("CircleShape2D_1m41k")
 max_health = 40
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 2
 script = ExtResource("3_61h3e")
 health = NodePath("../Health")
 
@@ -50,8 +49,9 @@ shape = SubResource("RectangleShape2D_0wbb6")
 debug_color = Color(0.796078, 0, 0, 1)
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 8
 script = ExtResource("4_212rs")
+damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(8, 8)

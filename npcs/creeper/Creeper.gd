@@ -41,8 +41,7 @@ func follow_player(delta: float) -> void:
 		var movement: Vector2 = direction * (speed * delta)
 		
 		if distanceLenght > personal_space_area:
-			move_and_collide(movement)
-			
+			move_and_collide(movement)		
 
 func _on_player_player_position_update(new_player_position: Vector2) -> void:
 	playerPosition = new_player_position
