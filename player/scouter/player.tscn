@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://core/HurtBox.gd" id="4_dq1gf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
-size = Vector2(13, 10)
+size = Vector2(24, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojq35"]
 atlas = ExtResource("2_go48k")
@@ -99,7 +99,7 @@ platform_wall_layers = 51
 script = ExtResource("1_opm3m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 11)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_lmx7v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
