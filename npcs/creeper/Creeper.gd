@@ -24,7 +24,7 @@ func _ready() -> void:
 	health.current = max_health
 	print_debug("new creeper health:" + str(health.current))
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health.is_alive:
 		line_of_sight_area.radius = line_of_sight_size
 
@@ -46,8 +46,8 @@ func follow_player(delta: float) -> void:
 func _on_player_player_position_update(new_player_position: Vector2) -> void:
 	playerPosition = new_player_position
 	
-func take_damage(damage: float):
-	health.damage(damage)
+func take_damage(damage_taken: float):
+	health.damage(damage_taken)
 
 func _on_health_depleted() -> void:
 	die()

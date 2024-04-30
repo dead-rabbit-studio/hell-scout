@@ -6,6 +6,7 @@ signal player_position_update(Vector2)
 signal player_has_died
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var shape: CollisionShape2D = $CollisionShape2D
 @onready var health: Health = $Health 
 
 @export var speed = 400.0
@@ -22,7 +23,7 @@ func _ready() -> void :
 	connect("changed_direction", melee_attack._on_player_changed_direction)
 	connect("player_position_update", melee_attack._on_player_position_update)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health.is_alive:
 		_animate()
 		_update_sprite_direction()

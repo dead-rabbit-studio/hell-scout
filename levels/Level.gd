@@ -37,10 +37,7 @@ func _spawn_creeper() -> void:
 	player.player_position_update.connect(creeper._on_player_player_position_update)
 	add_child(creeper)
 	
-func _get_spawn_position_inside_area(center_of_area:Vector2, radius: float) -> Vector2:
-	var player_position = player.global_position
-	var center_y = player_position.y    
-	
+func _get_spawn_position_inside_area(player_position:Vector2, radius: float) -> Vector2:
 	var random_angle = randf() * PI * 2
 	
 	var x = player_position.x + radius * cos(random_angle)
