@@ -16,4 +16,6 @@ shape = SubResource("RectangleShape2D_uuenw")
 scale = Vector2(0.114115, 0.102267)
 texture = ExtResource("2_tbrq5")
 
+[node name="Exit" type="Marker2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

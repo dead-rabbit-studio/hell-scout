@@ -13,18 +13,18 @@ func _on_body_entered(body: Player) -> void:
 	_handle_exit_direction(body)
 
 func _handle_exit_direction(body: Player):
-		print_debug("Exit: " + str(exit_zone_direction))
-		match exit_zone_direction:
-			WARP_DIRECTION.WARPABLE_DIRECTION:
-				pass #do nothing because it keeps the object direction
-			WARP_DIRECTION.TOP:
-				if body._currentDirectionVector.y >= 0:
-					body.animated_sprite.flip_v = false
-			WARP_DIRECTION.RIGHT:
-				if body._currentDirectionVector.x <= 0:
-					body.animated_sprite.flip_h = false
-			WARP_DIRECTION.BOTTOM:
-				body.animated_sprite.flip_v = true
-			WARP_DIRECTION.LEFT:
-				if body._currentDirectionVector.x >= 0:
-					body.animated_sprite.flip_h = true
+		if exit_zone != null:
+			match exit_zone_direction:
+				WARP_DIRECTION.WARPABLE_DIRECTION:
+					pass #do nothing because it keeps the object direction
+				WARP_DIRECTION.TOP:
+					if body._currentDirectionVector.y >= 0:
+						body.animated_sprite.flip_v = false
+				WARP_DIRECTION.RIGHT:
+					if body._currentDirectionVector.x <= 0:
+						body.animated_sprite.flip_h = false
+				WARP_DIRECTION.BOTTOM:
+					body.animated_sprite.flip_v = true
+				WARP_DIRECTION.LEFT:
+					if body._currentDirectionVector.x >= 0:
+						body.animated_sprite.flip_h = true
