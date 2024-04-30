@@ -68,7 +68,6 @@ position = Vector2(16, 32)
 collision_mask = 2
 priority = -1
 script = ExtResource("1_i0l7d")
-damage = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b7tgf")
@@ -77,6 +76,6 @@ debug_color = Color(0.894118, 0.192157, 0.639216, 0.419608)
 [node name="AttackVfx" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7yqwb")
 animation = &"attack"
-frame_progress = 0.320794
+frame_progress = 0.474806
 
 [connection signal="animation_finished" from="AttackVfx" to="." method="_on_attack_vfx_animation_finished"]

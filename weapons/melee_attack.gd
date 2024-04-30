@@ -59,4 +59,6 @@ func _on_player_position_update(player_position_update: Vector2):
 func _on_attack_vfx_animation_finished() -> void:
 	print_debug("Animation finished")
 	_attack_vfx.pause() 
+	_attack_vfx.frame_progress = 0
+	
 	queue_free()
