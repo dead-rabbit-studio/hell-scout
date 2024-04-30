@@ -6,7 +6,7 @@ signal player_position_update(Vector2)
 signal player_has_died
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var shape: CollisionShape2D = $CollisionShape2D
+@onready var playerArea: CollisionShape2D = $PlayerArea/CollisionShape2D
 @onready var health: Health = $Health 
 
 @export var speed = 400.0
@@ -44,7 +44,7 @@ func _physics_process(_delta: float) -> void:
 	
 func _move_player():
 	_currentDirectionVector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var playerDirection: PLAYER_DIRECTION = _map_direction_vector_to_player_direction(_currentDirectionVector)
+	var playerDirection: PLAYER_DIRECTION = get_current_direction()
 
 	if playerDirection != _lastDirection:
 		_lastDirection = playerDirection
@@ -66,16 +66,16 @@ func _update_sprite_direction():
 	elif _currentDirectionVector.x < 0:
 		animated_sprite.flip_h = true
 
-func _map_direction_vector_to_player_direction(directionVector: Vector2) -> PLAYER_DIRECTION: 
+func get_current_direction() -> PLAYER_DIRECTION: 
 	var playerDirection: PLAYER_DIRECTION = _lastDirection;
 	
-	if directionVector == Vector2(-1, 0):
+	if _currentDirectionVector == Vector2(-1, 0):
 		playerDirection = PLAYER_DIRECTION.LEFT
-	if directionVector == Vector2(0, -1):
+	if _currentDirectionVector == Vector2(0, -1):
 		playerDirection = PLAYER_DIRECTION.TOP
-	if directionVector == Vector2(1, 0):
+	if _currentDirectionVector == Vector2(1, 0):
 		playerDirection = PLAYER_DIRECTION.RIGHT
-	if directionVector == Vector2(0, 1):
+	if _currentDirectionVector == Vector2(0, 1):
 		playerDirection = PLAYER_DIRECTION.BOTTOM
 	
 	return playerDirection; 

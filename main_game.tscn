@@ -17,7 +17,6 @@ func on_game_over():
 func _on_gun_gun_was_fired(bullet: Node2D) -> void:
 	add_child(bullet)
 
-
 func _on_level_level_status_change(levelStatus: int) -> void:
 	if(levelStatus == LevelStatus.LOST):
 		on_game_over()
@@ -607,10 +606,9 @@ label_settings = SubResource("LabelSettings_kfjol")
 [node name="WarpZone" parent="." node_paths=PackedStringArray("exit_zone") instance=ExtResource("5_52lbn")]
 position = Vector2(84, 140)
 exit_zone = NodePath("../WarpZone2")
-exit_zone_direction = 4
 
 [node name="WarpZone2" parent="." instance=ExtResource("5_52lbn")]
-position = Vector2(131, 141)
+position = Vector2(176, 141)
 exit_zone_direction = 3
 
 [connection signal="level_status_change" from="Level" to="." method="_on_level_level_status_change"]
