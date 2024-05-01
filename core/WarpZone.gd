@@ -48,7 +48,6 @@ func _handle_exit_direction(body: Player) -> void:
 					if body._currentDirectionVector.x >= 0:
 						_warp_left(body, bodyWidth + padding)
 						
-						
 func _warp_top(body: Player, distance: float) -> void:
 	body.animated_sprite.flip_v = false
 	body.position = exit_zone.position - Vector2(0, distance) 
@@ -64,6 +63,3 @@ func _warp_bottom(body: Player, distance: float) -> void:
 func _warp_left(body: Player, distance: float) -> void:
 	body.animated_sprite.flip_h = true
 	body.position = exit_zone.position - Vector2(distance, 0) 
-	
-	
-	
