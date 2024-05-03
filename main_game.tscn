@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
 [ext_resource type="Script" path="res://levels/Level.gd" id="2_igq84"]
-[ext_resource type="Texture2D" uid="uid://gxrhu2xhpmf1" path="res://levels/tilemap/house_floors_walls.png" id="4_x6pgx"]
-[ext_resource type="PackedScene" uid="uid://u6v1rmv3f5tk" path="res://core/warp_zone.tscn" id="5_52lbn"]
-[ext_resource type="Texture2D" uid="uid://b0b8d8ta3fpkd" path="res://levels/tilemap/house_props.png" id="6_08dmc"]
-[ext_resource type="Script" path="res://Interactable.gd" id="6_cn00l"]
-[ext_resource type="Script" path="res://Object.gd" id="6_gjfxt"]
+[ext_resource type="Texture2D" uid="uid://gxrhu2xhpmf1" path="res://levels/enviroment/tilemap/house_floors_walls.png" id="2_owhbo"]
+[ext_resource type="PackedScene" uid="uid://u6v1rmv3f5tk" path="res://core/warpzone/warp_zone.tscn" id="5_52lbn"]
+[ext_resource type="Script" path="res://levels/enviroment/Tree.gd" id="6_f0rfs"]
+[ext_resource type="Script" path="res://core/Interactable.gd" id="7_t4u6m"]
+[ext_resource type="Texture2D" uid="uid://b0b8d8ta3fpkd" path="res://levels/enviroment/tilemap/house_props.png" id="8_junl8"]
 
 [sub_resource type="GDScript" id="GDScript_36clq"]
 script/source = "extends Node2D
@@ -30,7 +30,7 @@ func _on_interactable_object_interaction() -> void:
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hw3xp"]
-texture = ExtResource("4_x6pgx")
+texture = ExtResource("2_owhbo")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -568,7 +568,7 @@ radius = 14.0
 height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8xgka"]
-atlas = ExtResource("6_08dmc")
+atlas = ExtResource("8_junl8")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kswy7"]
@@ -619,10 +619,10 @@ exit_zone_direction = 3
 
 [node name="Object" type="Node2D" parent="Level"]
 position = Vector2(155, 91)
-script = ExtResource("6_gjfxt")
+script = ExtResource("6_f0rfs")
 
 [node name="Interactable" type="Area2D" parent="Level/Object"]
-script = ExtResource("6_cn00l")
+script = ExtResource("7_t4u6m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Object/Interactable"]
 position = Vector2(0, -1)
