@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=17 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
@@ -582,6 +582,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_g3l1c"]
+font_size = 12
+
 [sub_resource type="LabelSettings" id="LabelSettings_kfjol"]
 font_color = Color(0.133333, 0.133333, 0.133333, 1)
 
@@ -617,19 +620,28 @@ exit_zone = NodePath("../WarpZone2")
 position = Vector2(176, 141)
 exit_zone_direction = 3
 
-[node name="Object" type="Node2D" parent="Level"]
+[node name="Tree" type="Node2D" parent="Level"]
 position = Vector2(155, 91)
 script = ExtResource("6_f0rfs")
 
-[node name="Interactable" type="Area2D" parent="Level/Object"]
+[node name="Interactable" type="Area2D" parent="Level/Tree"]
 script = ExtResource("7_t4u6m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Object/Interactable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Tree/Interactable"]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_1jk7k")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level/Object"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level/Tree"]
 sprite_frames = SubResource("SpriteFrames_kswy7")
+
+[node name="InfoLabel" type="Label" parent="Level/Tree"]
+visible = false
+offset_left = -54.0
+offset_top = 15.0
+offset_right = 57.0
+offset_bottom = 41.0
+text = "Press 'E' to interact"
+label_settings = SubResource("LabelSettings_g3l1c")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -652,5 +664,7 @@ label_settings = SubResource("LabelSettings_kfjol")
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
 [connection signal="timeout" from="Level/MobSpawner" to="Level" method="_on_mob_spawner_timeout"]
-[connection signal="body_entered" from="Level/Object/Interactable" to="Level/Object/Interactable" method="_on_body_entered"]
-[connection signal="interaction" from="Level/Object/Interactable" to="Level/Object" method="_on_interactable_interaction"]
+[connection signal="body_entered" from="Level/Tree/Interactable" to="Level/Tree/Interactable" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/Tree/Interactable" to="Level/Tree/Interactable" method="_on_body_exited"]
+[connection signal="interaction" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_interaction"]
+[connection signal="on_interaction_area" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_on_interaction_area"]

@@ -1,14 +1,21 @@
 extends Node
 
 signal interaction
+signal on_interaction_area(isSomethingInside: bool)
 
 var can_interact: bool = false
-
-func _on_body_entered(body: Node2D) -> void:
-	print_debug("Player can interact")
-	can_interact = true
+@export var is_blocked: bool = false
+@onready var info_label: Label = $Info
 		
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('interact'):
-		if can_interact:
+		if can_interact && !is_blocked:
 			interaction.emit()
+
+func _on_body_entered(body: Player) -> void:
+	print_debug("Player can interact")
+	can_interact = true
+	on_interaction_area.emit(true)
+	
+func _on_body_exited(body: Player) -> void:
+	on_interaction_area.emit(false)
