@@ -11,6 +11,7 @@ signal player_has_died
 
 @export var speed = 400.0
 @export var max_health = 110
+@export var is_alive = true
 
 var _currentDirectionVector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
@@ -24,7 +25,7 @@ func _ready() -> void :
 	connect("player_position_update", melee_attack._on_player_position_update)
 
 func _process(_delta: float) -> void:
-	if health.is_alive:
+	if is_alive:
 		_animate()
 		_update_sprite_direction()
 		
@@ -36,10 +37,11 @@ func _process(_delta: float) -> void:
 			if melee_attack.get_parent() != null:
 				remove_child(melee_attack)
 	else:
+		health.kill()
 		animated_sprite.pause()
 
 func _physics_process(_delta: float) -> void:
-	if health.is_alive:
+	if is_alive:
 		_move_player()
 	
 func _move_player():
