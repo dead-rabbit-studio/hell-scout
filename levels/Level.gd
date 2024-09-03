@@ -44,3 +44,7 @@ func _get_spawn_position_inside_area(player_position:Vector2, radius: float) -> 
 	var y = player_position.y + radius * sin(random_angle)
 	
 	return Vector2(x, y)
+
+
+func _on_interactable_on_interaction_area_entered() -> void:
+	pass # Replace with function body.
