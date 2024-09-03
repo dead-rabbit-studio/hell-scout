@@ -8,7 +8,6 @@ signal depleted
 @export var max_health = 100
 @export var current: float = max_health
 
-	
 func heal(heal_points: float):
 	var health_after_heal = current + heal_points
 	if health_after_heal > max_health: 
@@ -22,9 +21,14 @@ func damage(damage_points: float):
 		else: current -= damage_points
 		
 		print_debug("current health " + str(current))
-		if current == 0 and is_mortal:
-			print_debug("died")
-			is_alive = false
-			depleted.emit()
+
+	if current == 0 and is_mortal:
+		kill()
 	
 func revive(): current = max_health
+
+func kill():
+	if is_alive:
+		print_debug("died")
+		is_alive = false
+		depleted.emit()
