@@ -3,7 +3,6 @@ enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 
 signal changed_direction(PLAYER_DIRECTION)
 signal player_position_update(Vector2)
-signal player_has_died
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var playerArea: CollisionShape2D = $PlayerArea/CollisionShape2D
@@ -16,6 +15,9 @@ signal player_has_died
 var _currentDirectionVector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
 var melee_attack: Area2D
+
+func take_damage(damage: float):
+	health.damage(damage)
 
 func _ready() -> void : 
 	melee_attack = preload("res://weapons/melee_attack.tscn").instantiate()
@@ -81,9 +83,6 @@ func get_current_direction() -> PLAYER_DIRECTION:
 		playerDirection = PLAYER_DIRECTION.BOTTOM
 	
 	return playerDirection; 
-			
-func take_damage(damage: float):
-	health.damage(damage)
 	
 func _on_health_depleted():
 	print_debug("player has died")
