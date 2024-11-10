@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oa5xbbpt1qcs"
-path="res://.godot/imported/scouter_spritesheet2.png-8a4f727197b8b27d80895e0545d0fb5d.ctex"
+uid="uid://dwgylbrkaa5ex"
+path="res://.godot/imported/scouter_spritesheet2.png-7205683b36ed0c1191bad16d60f6f105.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/scouter/scouter_spritesheet2.png"
-dest_files=["res://.godot/imported/scouter_spritesheet2.png-8a4f727197b8b27d80895e0545d0fb5d.ctex"]
+source_file="res://levels/enviroment/spritessheet/scouter_spritesheet2.png"
+dest_files=["res://.godot/imported/scouter_spritesheet2.png-7205683b36ed0c1191bad16d60f6f105.ctex"]
 
 [params]
 
