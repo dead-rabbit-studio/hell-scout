@@ -4,7 +4,7 @@ enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 signal changed_direction(PLAYER_DIRECTION)
 signal player_position_update(Vector2)
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+# @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var playerArea: CollisionShape2D = $PlayerArea/CollisionShape2D
 @onready var health: Health = $Health 
 
@@ -40,7 +40,6 @@ func _process(_delta: float) -> void:
 				remove_child(melee_attack)
 	else:
 		health.kill()
-		animated_sprite.pause()
 
 func _physics_process(_delta: float) -> void:
 	if is_alive:
@@ -59,16 +58,18 @@ func _move_player():
 	player_position_update.emit(global_position)
 	
 func _animate():
-	if velocity.length() > 0:
-		animated_sprite.play('running')
-	else: 
-		animated_sprite.play('idle')	
+	pass
+	# if velocity.length() > 0:
+	# 	animated_sprite.play('running')
+	# else: 
+	# 	animated_sprite.play('idle')	
 
 func _update_sprite_direction():
-	if _currentDirectionVector.x > 0:
-		animated_sprite.flip_h = false
-	elif _currentDirectionVector.x < 0:
-		animated_sprite.flip_h = true
+	pass
+	# if _currentDirectionVector.x > 0:
+	# 	animated_sprite.flip_h = false
+	# elif _currentDirectionVector.x < 0:
+	# 	animated_sprite.flip_h = true
 
 func get_current_direction() -> PLAYER_DIRECTION: 
 	var playerDirection: PLAYER_DIRECTION = _lastDirection;
