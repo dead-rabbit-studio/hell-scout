@@ -291,9 +291,11 @@ position = Vector2(1, 7)
 [node name="WarpZone" parent="Level" node_paths=PackedStringArray("exit_zone") instance=ExtResource("5_52lbn")]
 position = Vector2(84, 140)
 exit_zone = NodePath("../WarpZone2")
+exit_zone_direction = 3
 
 [node name="WarpZone2" parent="Level" instance=ExtResource("5_52lbn")]
 position = Vector2(176, 141)
+rotation = -1.81857e-05
 exit_zone_direction = 3
 
 [node name="Tree" type="Node2D" parent="Level"]
