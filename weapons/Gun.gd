@@ -5,7 +5,7 @@ signal gun_was_fired(bullet: RigidBody2D)
 @export var speed:int  = 1200
 @export var gun_direction: GUN_DIRECTION = GUN_DIRECTION.RIGHT 
 
-const gun_front_position: int = 25
+const _gun_front_position: int = 25
 
 func _shoot() -> void:
 	var bullet: RigidBody2D = preload('res://weapons/bullet.tscn').instantiate()
@@ -20,7 +20,7 @@ func _get_bullet_direction() -> Vector2:
 	return _gun_front_direction_to_vector2(1, gun_direction)
 
 func _gun_position() -> Vector2:
-	return _gun_front_direction_to_vector2(gun_front_position, gun_direction)
+	return _gun_front_direction_to_vector2(_gun_front_position, gun_direction)
 	
 func _gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION) -> Vector2:
 	var resultVector: Vector2;

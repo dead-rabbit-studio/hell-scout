@@ -11,9 +11,10 @@ const NODE_NAME = "Creeper"
 @onready var collisionShape: CollisionShape2D = $CollisionShape2D
 @onready var health: Health = $Health
 
-var playerPosition: Vector2
-var player_los: bool = false
+var _player_position: Vector2
+var _player_los: bool = false
 
+# Can be called to kill a creeper by the game keeper
 func die() -> void:
 	queue_free()
 	print_debug("a creeper has died")
@@ -29,22 +30,22 @@ func _process(_delta: float) -> void:
 		line_of_sight_area.radius = line_of_sight_size
 
 func _physics_process(delta: float) -> void:
-	follow_player(delta)
+	_follow_player(delta)
 	
-func follow_player(delta: float) -> void: 
+func _follow_player(delta: float) -> void: 
 	const personal_space_area = 30
-	if player_los:
-		var distance_from_player_vector: Vector2 = playerPosition - global_position
+	if _player_los:
+		var distance_from_player_vector: Vector2 = _player_position - global_position
 		var direction: Vector2 = distance_from_player_vector.normalized()
-		var distanceLenght: float = abs(distance_from_player_vector.length())
+		var distance_lenght: float = abs(distance_from_player_vector.length())
 		
 		var movement: Vector2 = direction * (speed * delta)
 		
-		if distanceLenght > personal_space_area:
+		if distance_lenght > personal_space_area:
 			move_and_collide(movement)		
 
 func _on_player_player_position_update(new_player_position: Vector2) -> void:
-	playerPosition = new_player_position
+	_player_position = new_player_position
 	
 func take_damage(damage_taken: float):
 	health.damage(damage_taken)
@@ -54,9 +55,9 @@ func _on_health_depleted() -> void:
 
 func _on_engage_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		player_los = true	
-		playerPosition = body.global_position
+		_player_los = true	
+		_player_position = body.global_position
 
 func _on_engage_area_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		player_los = false
+		_player_los = false
