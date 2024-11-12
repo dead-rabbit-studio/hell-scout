@@ -14,7 +14,7 @@ signal player_position_update(Vector2)
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
-var _melee_attack: Area2D = preload(R.scenes.melee_attack).instantiate()
+var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
 
 func take_damage(damage: float):
 	health.damage(damage)
@@ -22,18 +22,18 @@ func take_damage(damage: float):
 func _ready() -> void : 
 	health.max_health = max_health
 	health.is_mortal = true
-	connect("changed_direction", _melee_attack._on_player_changed_direction)
-	connect("player_position_update", _melee_attack._on_player_position_update)
+	connect("changed_direction", _MeleeAttack._on_player_changed_direction)
+	connect("player_position_update", _MeleeAttack._on_player_position_update)
 
 func _process(_delta: float) -> void:
 	if is_alive:
 		if Input.is_action_pressed(R.inputs.attack):
-			if _melee_attack.get_parent() == null:
-				add_child(_melee_attack)
-				_melee_attack.attack()
+			if _MeleeAttack.get_parent() == null:
+				add_child(_MeleeAttack)
+				_MeleeAttack.attack()
 		else:
-			if _melee_attack.get_parent() != null:
-				remove_child(_melee_attack)
+			if _MeleeAttack.get_parent() != null:
+				remove_child(_MeleeAttack)
 	else:
 		health.kill()
 

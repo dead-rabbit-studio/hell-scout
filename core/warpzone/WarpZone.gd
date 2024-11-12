@@ -15,12 +15,12 @@ func _on_body_entered(body: Player) -> void:
 	_handle_exit_direction(body)
 
 func _handle_exit_direction(body: Player) -> void:
-		var bodyWidth = body.playerArea.shape.size.x
-		var bodyHeight = body.playerArea.shape.size.y
+		var bodyWidth = body.player_area.shape.size.x
+		var bodyHeight = body.player_area.shape.size.y
 		var padding = 8
 		
 		if exit_zone != null:
-			print_debug("WARP: " + str(exit_zone.position) + " " + str(body.playerArea.shape.size))
+			print_debug("WARP: " + str(exit_zone.position) + " " + str(body.player_area.shape.size))
 			print_debug("WARP AFTERSUM: " + str(exit_zone.position + Vector2(bodyHeight, 0)))
 			
 			match exit_zone_direction:
@@ -37,17 +37,18 @@ func _handle_exit_direction(body: Player) -> void:
 							_warp_bottom(body, bodyWidth + padding)																					
 				WARP_DIRECTION.TOP:
 					if body._currentDirectionVector.y >= 0:
-						_warp_top(body,  bodyHeight + padding)
+						_warp_top(body, bodyHeight + padding)
 				WARP_DIRECTION.RIGHT:
 					if body._currentDirectionVector.x <= 0:
-						_warp_right(body,  bodyWidth + padding)
+						_warp_right(body, bodyWidth + padding)
 				WARP_DIRECTION.BOTTOM:
 					if body._currentDirectionVector.y <= 0:
-						_warp_bottom(body,  bodyHeight + padding)
+						_warp_bottom(body, bodyHeight + padding)
 				WARP_DIRECTION.LEFT:
 					if body._currentDirectionVector.x >= 0:
 						_warp_left(body, bodyWidth + padding)
 						
+#TODO: Replace these functions with just a warp(body, distance, flips and position)
 func _warp_top(body: Player, distance: float) -> void:
 	body.animated_sprite.flip_v = false
 	body.position = exit_zone.position - Vector2(0, distance) 
