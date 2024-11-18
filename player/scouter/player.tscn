@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
 [ext_resource type="Texture2D" uid="uid://dwgylbrkaa5ex" path="res://levels/enviroment/spritessheet/scouter_spritesheet2.png" id="4_3ngsw"]
 [ext_resource type="Script" path="res://core/HurtBox.gd" id="4_dq1gf"]
-[ext_resource type="Script" path="res://player/scouter/animator.gd" id="5_la07l"]
+[ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)

@@ -29,6 +29,10 @@ window/size/window_height_override=1090
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
+[dotnet]
+
+project/assembly_name="Hell Scout"
+
 [input]
 
 move_up={
