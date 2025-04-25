@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://player/scouter/Player.gd" id="1_opm3m"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
 [ext_resource type="Texture2D" uid="uid://dwgylbrkaa5ex" path="res://levels/enviroment/spritessheet/scouter_spritesheet2.png" id="4_3ngsw"]
-[ext_resource type="Script" path="res://core/HurtBox.gd" id="4_dq1gf"]
+[ext_resource type="Script" path="res://core/hit_detection/HurtBox.gd" id="4_dq1gf"]
 [ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
-[ext_resource type="Script" path="res://interactor.gd" id="6_lvn4h"]
+[ext_resource type="Script" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)

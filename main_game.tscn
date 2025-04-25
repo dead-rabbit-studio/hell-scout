@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://gxrhu2xhpmf1" path="res://levels/enviroment/tilemap/house_floors_walls.png" id="2_owhbo"]
 [ext_resource type="PackedScene" uid="uid://u6v1rmv3f5tk" path="res://core/warpzone/warp_zone.tscn" id="5_52lbn"]
 [ext_resource type="Script" path="res://levels/enviroment/Tree.gd" id="6_f0rfs"]
-[ext_resource type="Script" path="res://core/Interactable.gd" id="7_t4u6m"]
+[ext_resource type="Script" path="res://core/interaction/Interactable.gd" id="7_t4u6m"]
 [ext_resource type="Texture2D" uid="uid://b0b8d8ta3fpkd" path="res://levels/enviroment/tilemap/house_props.png" id="8_junl8"]
 [ext_resource type="Script" path="res://collectable.gd" id="9_hlbds"]
 
