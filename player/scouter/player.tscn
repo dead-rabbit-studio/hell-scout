@@ -289,6 +289,8 @@ graph_offset = Vector2(-106.71, -104.37)
 [node name="Player" type="CharacterBody2D"]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
+speed = null
+max_health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.5)
@@ -345,3 +347,4 @@ animation_tree = NodePath("../AnimationTree")
 script = ExtResource("6_lvn4h")
 
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
+[connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]

@@ -1,3 +1,4 @@
+class_name Interactor
 extends Node2D
 
 signal interacted

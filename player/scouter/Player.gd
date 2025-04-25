@@ -3,14 +3,16 @@ enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 
 signal changed_direction(PLAYER_DIRECTION)
 signal player_position_update(Vector2)
+signal object_collected()
 
 @onready var player_area: CollisionShape2D = $PlayerArea/CollisionShape2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var health: Health = $Health 
+@onready var interactor: Interactor = $Interactor
 
 @export var speed = 400.0
 @export var max_health = 110
-@export var is_alive = true
+var is_alive = true
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
@@ -27,6 +29,7 @@ func _ready() -> void :
 
 func _process(_delta: float) -> void:
 	if is_alive:
+		### Handle Attack
 		if Input.is_action_pressed(R.player_actions.attack):
 			if _MeleeAttack.get_parent() == null:
 				add_child(_MeleeAttack)
@@ -34,12 +37,16 @@ func _process(_delta: float) -> void:
 		else:
 			if _MeleeAttack.get_parent() != null:
 				remove_child(_MeleeAttack)
-	else:
-		health.kill()
+
+		if Input.is_action_just_pressed(R.player_actions.interact):
+			interactor.interact()
+			
 
 func _physics_process(_delta: float) -> void:
 	if is_alive:
 		_move_player()
+	else:
+		health.kill()
 	
 func _move_player():
 	_current_direction_vector = Input.get_vector(R.player_actions.move_left, R.player_actions.move_right, R.player_actions.move_up, R.player_actions.move_down)
@@ -69,3 +76,6 @@ func get_current_direction() -> PLAYER_DIRECTION:
 	
 func _on_health_depleted():
 	print_debug(R.strings.player_has_died)
+
+func _on_interactor_interacted() -> void:
+	object_collected.emit()

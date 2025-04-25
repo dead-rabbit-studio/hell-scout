@@ -22,7 +22,7 @@ func damage(damage_points: float):
 		
 		print_debug("current health " + str(current))
 
-	if current == 0 and is_mortal:
+	if current == 0 and !is_mortal:
 		kill()
 	
 func revive(): current = max_health
