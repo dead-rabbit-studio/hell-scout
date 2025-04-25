@@ -27,7 +27,7 @@ func _ready() -> void :
 
 func _process(_delta: float) -> void:
 	if is_alive:
-		if Input.is_action_pressed(R.inputs.attack):
+		if Input.is_action_pressed(R.player_actions.attack):
 			if _MeleeAttack.get_parent() == null:
 				add_child(_MeleeAttack)
 				_MeleeAttack.attack()
@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 		_move_player()
 	
 func _move_player():
-	_current_direction_vector = Input.get_vector(R.inputs.move_left, R.inputs.move_right, R.inputs.move_up, R.inputs.move_down)
+	_current_direction_vector = Input.get_vector(R.player_actions.move_left, R.player_actions.move_right, R.player_actions.move_up, R.player_actions.move_down)
 	var player_direction: PLAYER_DIRECTION = get_current_direction()
 
 	if player_direction != _lastDirection:

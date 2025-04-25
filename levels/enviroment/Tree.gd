@@ -1,11 +1,15 @@
 extends Node2D
 
 @onready var info_label: Label = $InfoLabel
+@onready var player_area: CollisionShape2D = $PlayerArea/CollisionShape2D
+@onready var collectable: Collectable = $Collectable
 
 func _on_interactable_interaction() -> void:
-	print_debug("Player interacted with the tree")
-	queue_free()
-
+	collectable.collect()
 
 func _on_interactable_on_interaction_area(isSomethingInside: bool) -> void:
 	info_label.visible = isSomethingInside
+
+
+func _on_collectable_collected() -> void:
+	queue_free()

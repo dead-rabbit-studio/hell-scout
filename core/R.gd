@@ -1,11 +1,12 @@
 class_name R
 
-const inputs = { 
+const player_actions = { 
     "attack": "attack",
     "move_left": "move_left",
     "move_up": "move_up",
     "move_right": "move_right",
     "move_down": "move_down",
+    "interact": "interact"
 } 
 
 const scenes = {

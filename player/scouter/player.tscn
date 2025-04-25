@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://xse6umb621tq"]
+[gd_scene load_steps=36 format=3 uid="uid://xse6umb621tq"]
 
 [ext_resource type="Script" path="res://player/scouter/Player.gd" id="1_opm3m"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
 [ext_resource type="Texture2D" uid="uid://dwgylbrkaa5ex" path="res://levels/enviroment/spritessheet/scouter_spritesheet2.png" id="4_3ngsw"]
 [ext_resource type="Script" path="res://core/HurtBox.gd" id="4_dq1gf"]
 [ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
+[ext_resource type="Script" path="res://interactor.gd" id="6_lvn4h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)
@@ -339,5 +340,8 @@ parameters/Running/TimeScale/scale = 1.0
 [node name="Animator" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("5_la07l")
 animation_tree = NodePath("../AnimationTree")
+
+[node name="Interactor" type="Node2D" parent="."]
+script = ExtResource("6_lvn4h")
 
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]

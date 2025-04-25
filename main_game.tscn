@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=18 format=3 uid="uid://deqtmks54a4u7"]
 
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://levels/enviroment/Tree.gd" id="6_f0rfs"]
 [ext_resource type="Script" path="res://core/Interactable.gd" id="7_t4u6m"]
 [ext_resource type="Texture2D" uid="uid://b0b8d8ta3fpkd" path="res://levels/enviroment/tilemap/house_props.png" id="8_junl8"]
+[ext_resource type="Script" path="res://collectable.gd" id="9_hlbds"]
 
 [sub_resource type="GDScript" id="GDScript_36clq"]
 script/source = "extends Node2D
@@ -321,6 +322,9 @@ offset_bottom = 41.0
 text = "Press 'E' to interact"
 label_settings = SubResource("LabelSettings_g3l1c")
 
+[node name="Collectable" type="Node2D" parent="Level/Tree"]
+script = ExtResource("9_hlbds")
+
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -346,3 +350,5 @@ label_settings = SubResource("LabelSettings_kfjol")
 [connection signal="body_exited" from="Level/Tree/Interactable" to="Level/Tree/Interactable" method="_on_body_exited"]
 [connection signal="interaction" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_interaction"]
 [connection signal="on_interaction_area" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_on_interaction_area"]
+[connection signal="collected" from="Level/Tree/Collectable" to="Level/Player" method="_on_collectable_collected"]
+[connection signal="collected" from="Level/Tree/Collectable" to="Level/Tree" method="_on_collectable_collected"]
