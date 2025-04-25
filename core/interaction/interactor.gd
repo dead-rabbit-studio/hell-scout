@@ -3,5 +3,8 @@ extends Node2D
 
 signal interacted
 
+@export var is_enabled = false
+
 func interact():
-	interacted.emit()
+	if is_enabled:
+		interacted.emit()

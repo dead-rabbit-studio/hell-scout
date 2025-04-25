@@ -281,7 +281,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608,
 position = Vector2(78, 172)
 collision_mask = 3
 speed = 250.0
-max_health = 110
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 
@@ -348,9 +347,12 @@ label_settings = SubResource("LabelSettings_kfjol")
 [connection signal="object_collected" from="Level/Player" to="Level/Tree" method="_on_player_object_collected"]
 [connection signal="gun_was_fired" from="Level/Player/Gun" to="Level" method="_on_gun_gun_was_fired"]
 [connection signal="timeout" from="Level/MobSpawner" to="Level" method="_on_mob_spawner_timeout"]
+[connection signal="area_entered" from="Level/Tree/Interactable" to="Level/Player" method="_on_interactable_area_entered"]
+[connection signal="area_entered" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_area_entered"]
+[connection signal="area_entered" from="Level/Tree/Interactable" to="Level/Player" method="_on_interactable_area_entered"]
+[connection signal="area_entered" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_area_entered"]
 [connection signal="body_entered" from="Level/Tree/Interactable" to="Level/Tree/Interactable" method="_on_body_entered"]
 [connection signal="body_exited" from="Level/Tree/Interactable" to="Level/Tree/Interactable" method="_on_body_exited"]
 [connection signal="interaction" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_interaction"]
-[connection signal="on_interaction_area" from="Level/Tree/Interactable" to="Level/Tree" method="_on_interactable_on_interaction_area"]
 [connection signal="collected" from="Level/Tree/Collectable" to="Level/Player" method="_on_collectable_collected"]
 [connection signal="collected" from="Level/Tree/Collectable" to="Level/Tree" method="_on_collectable_collected"]

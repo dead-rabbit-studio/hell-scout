@@ -81,3 +81,6 @@ func _on_health_depleted():
 
 func _on_interactor_interacted() -> void:
 	object_collected.emit()
+
+func _on_interactable_area_entered(isSomethingInside:bool) -> void:
+	interactor.is_enabled = isSomethingInside
