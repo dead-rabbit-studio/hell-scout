@@ -16,6 +16,7 @@ var is_alive = true
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
+
 var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
 
 func take_damage(damage: float):
@@ -32,8 +33,9 @@ func _process(_delta: float) -> void:
 		### Handle Attack
 		if Input.is_action_pressed(R.player_actions.attack):
 			if _MeleeAttack.get_parent() == null:
-				add_child(_MeleeAttack)
-				_MeleeAttack.attack()
+					add_child(_MeleeAttack)
+			print("attacking")
+			_MeleeAttack.attack()
 		else:
 			if _MeleeAttack.get_parent() != null:
 				remove_child(_MeleeAttack)

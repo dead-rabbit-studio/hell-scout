@@ -289,8 +289,6 @@ graph_offset = Vector2(-106.71, -104.37)
 [node name="Player" type="CharacterBody2D"]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
-speed = null
-max_health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.5)
