@@ -281,6 +281,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608,
 position = Vector2(78, 172)
 collision_mask = 3
 speed = 250.0
+max_health = null
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 
@@ -304,6 +305,7 @@ position = Vector2(155, 91)
 script = ExtResource("6_f0rfs")
 
 [node name="Interactable" type="Area2D" parent="Level/Tree"]
+position = Vector2(1, 0)
 script = ExtResource("7_t4u6m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Tree/Interactable"]

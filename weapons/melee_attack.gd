@@ -12,8 +12,8 @@ func _process(_delta):
         _attack_vfx.play("attack")
         print("attack: " + str(attack_direction))
 
-func attack() -> void:
-    is_attacking = true
+func attack(attacking = true) -> void:
+    is_attacking = attacking
     if is_attacking:
         const melee_attack_vertical_size = Vector2(64, 32)
         const melee_attack_horizontal_size = Vector2(32, 64)

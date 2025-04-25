@@ -9,6 +9,7 @@ signal object_collected()
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var health: Health = $Health 
 @onready var interactor: Interactor = $Interactor
+@onready var controller: Controller = $Controller
 
 @export var speed = 400.0
 @export var max_health = 110
@@ -31,18 +32,11 @@ func _ready() -> void :
 func _process(_delta: float) -> void:
 	if is_alive:
 		### Handle Attack
-		if Input.is_action_pressed(R.player_actions.attack):
-			if _MeleeAttack.get_parent() == null:
-					add_child(_MeleeAttack)
-			print("attacking")
-			_MeleeAttack.attack()
-		else:
-			if _MeleeAttack.get_parent() != null:
-				remove_child(_MeleeAttack)
+		if _MeleeAttack.get_parent() != null && !_MeleeAttack.is_attacking:
+			remove_child(_MeleeAttack)
 
 		if Input.is_action_just_pressed(R.player_actions.interact):
 			interactor.interact()
-			
 
 func _physics_process(_delta: float) -> void:
 	if is_alive:
@@ -84,3 +78,9 @@ func _on_interactor_interacted() -> void:
 
 func _on_interactable_area_entered(isSomethingInside:bool) -> void:
 	interactor.is_enabled = isSomethingInside
+
+func _on_controller_attack(is_attacking: bool) -> void:
+	if _MeleeAttack.get_parent() == null:
+		add_child(_MeleeAttack)
+
+	_MeleeAttack.attack(is_attacking)
