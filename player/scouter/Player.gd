@@ -35,9 +35,6 @@ func _process(_delta: float) -> void:
 		if _MeleeAttack.get_parent() != null && !_MeleeAttack.is_attacking:
 			remove_child(_MeleeAttack)
 
-		if Input.is_action_just_pressed(R.player_actions.interact):
-			interactor.interact()
-
 func _physics_process(_delta: float) -> void:
 	if is_alive:
 		_move_player()
@@ -79,8 +76,13 @@ func _on_interactor_interacted() -> void:
 func _on_interactable_area_entered(isSomethingInside:bool) -> void:
 	interactor.is_enabled = isSomethingInside
 
-func _on_controller_attack(is_attacking: bool) -> void:
-	if _MeleeAttack.get_parent() == null:
-		add_child(_MeleeAttack)
+func _on_controller_interact() -> void:
+	interactor.interact()
 
-	_MeleeAttack.attack(is_attacking)
+func _on_controller_attacked(_is_attacking:bool) -> void:
+	print("on controller attacked")
+	if _is_attacking:
+		if _MeleeAttack.get_parent() == null:
+			add_child(_MeleeAttack)
+		print("attacking")
+	_MeleeAttack.attack(_is_attacking)
