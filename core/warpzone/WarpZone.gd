@@ -27,13 +27,13 @@ func _handle_exit_direction(body: Player) -> void:
 			WARP_DIRECTION.WARPABLE_DIRECTION:
 				var direction = body.get_current_direction()
 				match direction:
-					Player.PLAYER_DIRECTION.LEFT:
+					R.Directions.LEFT:
 						_warp_left(body, bodyWidth + padding)
-					Player.PLAYER_DIRECTION.TOP:
+					R.Directions.UP:
 						_warp_top(body, bodyWidth + padding)
-					Player.PLAYER_DIRECTION.RIGHT:
+					R.Directions.RIGHT:
 						_warp_right(body, bodyWidth + padding)
-					Player.PLAYER_DIRECTION.BOTTOM:
+					R.Directions.DOWN:
 						_warp_bottom(body, bodyWidth + padding)																					
 			WARP_DIRECTION.TOP:
 				if body._currentDirectionVector.y >= 0:
