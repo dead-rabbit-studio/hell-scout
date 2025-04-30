@@ -16,7 +16,7 @@ signal object_collected()
 var is_alive = true
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
-var _lastDirection: PLAYER_DIRECTION = PLAYER_DIRECTION.RIGHT
+var _lastDirection: R.Directions = R.Directions.RIGHT
 
 var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
 
@@ -31,7 +31,6 @@ func _ready() -> void :
 
 func _process(_delta: float) -> void:
 	if is_alive:
-		### Handle Attack
 		if _MeleeAttack.get_parent() != null && !_MeleeAttack.is_attacking:
 			remove_child(_MeleeAttack)
 
@@ -43,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 	
 func _move_player():
 	_current_direction_vector = Input.get_vector(R.player_actions.move_left, R.player_actions.move_right, R.player_actions.move_up, R.player_actions.move_down)
-	var player_direction: PLAYER_DIRECTION = get_current_direction()
+	var player_direction: R.Directions = get_current_direction()
 
 	if player_direction != _lastDirection:
 		_lastDirection = player_direction
@@ -53,17 +52,17 @@ func _move_player():
 	move_and_slide()
 	player_position_update.emit(global_position)
 	
-func get_current_direction() -> PLAYER_DIRECTION: 
-	var playerDirection: PLAYER_DIRECTION = _lastDirection;
+func get_current_direction() -> R.Directions: 
+	var playerDirection: R.Directions = _lastDirection;
 	
 	if _current_direction_vector == Vector2(-1, 0):
-		playerDirection = PLAYER_DIRECTION.LEFT
+		playerDirection = R.Directions.LEFT
 	if _current_direction_vector == Vector2(0, -1):
-		playerDirection = PLAYER_DIRECTION.TOP
+		playerDirection = R.Directions.UP
 	if _current_direction_vector == Vector2(1, 0):
-		playerDirection = PLAYER_DIRECTION.RIGHT
+		playerDirection = R.Directions.RIGHT
 	if _current_direction_vector == Vector2(0, 1):
-		playerDirection = PLAYER_DIRECTION.BOTTOM
+		playerDirection = R.Directions.DOWN
 	
 	return playerDirection; 
 	
