@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://core/hit_detection/HurtBox.gd" id="4_dq1gf"]
 [ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
 [ext_resource type="Script" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
-[ext_resource type="Script" path="res://core/controller/input_controller.gd" id="7_iu32n"]
+[ext_resource type="Script" path="res://core/controller/ai_controller.gd" id="7_5ys7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)
@@ -347,7 +347,7 @@ script = ExtResource("6_lvn4h")
 
 [node name="Controller" type="Node2D" parent="."]
 position = Vector2(1, 0)
-script = ExtResource("7_iu32n")
+script = ExtResource("7_5ys7x")
 
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]

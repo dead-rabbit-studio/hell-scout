@@ -79,7 +79,7 @@ func _on_controller_interact() -> void:
 	interactor.interact()
 
 func _on_controller_attacked(_is_attacking:bool) -> void:
-	print("on controller attacked")
+	print("Player on controller attacked")
 	if _is_attacking:
 		if _MeleeAttack.get_parent() == null:
 			add_child(_MeleeAttack)
@@ -87,4 +87,5 @@ func _on_controller_attacked(_is_attacking:bool) -> void:
 	_MeleeAttack.attack(_is_attacking)
 
 func _on_controller_moved(direction:Vector2) -> void:
+	print("Player moved: " +  str(direction))
 	_move_player(direction)
