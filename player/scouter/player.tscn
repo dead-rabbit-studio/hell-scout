@@ -353,3 +353,4 @@ script = ExtResource("7_iu32n")
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]
 [connection signal="attacked" from="Controller" to="." method="_on_controller_attacked"]
 [connection signal="interact" from="Controller" to="." method="_on_controller_interact"]
+[connection signal="moved" from="Controller" to="." method="_on_controller_moved"]

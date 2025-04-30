@@ -18,3 +18,5 @@ const scenes = {
 const strings = {
     "player_has_died": "player has died"
 }
+
+

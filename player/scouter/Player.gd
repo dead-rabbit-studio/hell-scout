@@ -10,7 +10,6 @@ signal object_collected()
 @onready var health: Health = $Health 
 @onready var interactor: Interactor = $Interactor
 @onready var controller: Controller = $Controller
-
 @export var speed = 400.0
 @export var max_health = 110
 var is_alive = true
@@ -36,12 +35,13 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if is_alive:
-		_move_player()
+		##TODO: disabled inputs from controllers based on is_alive flag
+		pass
 	else:
 		health.kill()
 	
-func _move_player():
-	_current_direction_vector = Input.get_vector(R.player_actions.move_left, R.player_actions.move_right, R.player_actions.move_up, R.player_actions.move_down)
+func _move_player(direction: Vector2):
+	_current_direction_vector = direction
 	var player_direction: R.Directions = get_current_direction()
 
 	if player_direction != _lastDirection:
@@ -85,3 +85,6 @@ func _on_controller_attacked(_is_attacking:bool) -> void:
 			add_child(_MeleeAttack)
 		print("attacking")
 	_MeleeAttack.attack(_is_attacking)
+
+func _on_controller_moved(direction:Vector2) -> void:
+	_move_player(direction)
