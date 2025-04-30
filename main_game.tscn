@@ -281,7 +281,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608,
 position = Vector2(78, 172)
 collision_mask = 3
 speed = 250.0
-max_health = 110
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 
