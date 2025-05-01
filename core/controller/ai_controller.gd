@@ -1,19 +1,20 @@
 extends Controller
 
 func _process(_delta):
-	var action = _choose_action()
+	if is_enabled:
+		var action = _choose_action()
 
-	print("AI Controller choosed action: " + str(action))
-	match action:
-		R.player_actions.attack:
-			print("AI Controller attack")
-			attacked.emit(true)
-		R.player_actions.interact:
-			print("AI Controller interact")
-			interact.emit()
-		action when action.contains("move"):
-			print("AI Controller moved")
-			moved.emit(_random_direction())
+		print("AI Controller choosed action: " + str(action))
+		match action:
+			R.player_actions.attack:
+				print("AI Controller attack")
+				attacked.emit(true)
+			R.player_actions.interact:
+				print("AI Controller interact")
+				interact.emit()
+			action when action.contains("move"):
+				print("AI Controller moved")
+				moved.emit(_random_direction())
 
 func _choose_action() -> String:
 	var size: int = R.player_actions.keys().size()

@@ -12,7 +12,7 @@ signal object_collected()
 @onready var controller: Controller = $Controller
 @export var speed = 400.0
 @export var max_health = 110
-var is_alive = true
+@export var is_alive = true
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _lastDirection: R.Directions = R.Directions.RIGHT
@@ -21,6 +21,12 @@ var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
 
 func take_damage(damage: float):
 	health.damage(damage)
+
+func die(): 
+	print_debug(R.strings.player_has_died)
+	controller.is_enabled = false
+	remove_child(_MeleeAttack)
+	animation_tree.active = false
 
 func _ready() -> void : 
 	health.max_health = max_health
@@ -34,10 +40,7 @@ func _process(_delta: float) -> void:
 			remove_child(_MeleeAttack)
 
 func _physics_process(_delta: float) -> void:
-	if is_alive:
-		##TODO: disabled inputs from controllers based on is_alive flag
-		pass
-	else:
+	if !is_alive:
 		health.kill()
 	
 func _move_player(direction: Vector2):
@@ -67,8 +70,7 @@ func get_current_direction() -> R.Directions:
 	return playerDirection; 
 	
 func _on_health_depleted():
-	print_debug(R.strings.player_has_died)
-
+	die()
 func _on_interactor_interacted() -> void:
 	object_collected.emit()
 
@@ -80,7 +82,7 @@ func _on_controller_interact() -> void:
 
 func _on_controller_attacked(_is_attacking:bool) -> void:
 	print("Player on controller attacked")
-	if _is_attacking:
+	if _is_attacking and is_alive:
 		if _MeleeAttack.get_parent() == null:
 			add_child(_MeleeAttack)
 		print("attacking")
