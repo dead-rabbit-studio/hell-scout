@@ -71,6 +71,7 @@ func get_current_direction() -> R.Directions:
 	
 func _on_health_depleted():
 	die()
+
 func _on_interactor_interacted() -> void:
 	object_collected.emit()
 

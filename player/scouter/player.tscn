@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://xse6umb621tq"]
+[gd_scene load_steps=38 format=3 uid="uid://xse6umb621tq"]
 
 [ext_resource type="Script" path="res://player/scouter/Player.gd" id="1_opm3m"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
 [ext_resource type="Script" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
 [ext_resource type="Script" path="res://core/controller/ai_controller.gd" id="7_5ys7x"]
+[ext_resource type="Script" path="res://player/scouter/neural_network.gd" id="8_lldpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)
@@ -349,8 +350,12 @@ script = ExtResource("6_lvn4h")
 position = Vector2(1, 0)
 script = ExtResource("7_5ys7x")
 
+[node name="NeuralNetwork" type="Node" parent="."]
+script = ExtResource("8_lldpg")
+
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]
 [connection signal="attacked" from="Controller" to="." method="_on_controller_attacked"]
 [connection signal="interact" from="Controller" to="." method="_on_controller_interact"]
 [connection signal="moved" from="Controller" to="." method="_on_controller_moved"]
+[connection signal="action_required" from="NeuralNetwork" to="Controller" method="_on_neural_network_action_required"]
