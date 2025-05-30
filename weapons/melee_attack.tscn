@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://m42vso1w6gqq"]
 
-[ext_resource type="Script" path="res://weapons/melee_attack.gd" id="1_i0l7d"]
+[ext_resource type="Script" uid="uid://bcjoh2e2nujra" path="res://weapons/melee_attack.gd" id="1_i0l7d"]
 [ext_resource type="Texture2D" uid="uid://b7f7ledx7eh33" path="res://weapons/melee-attack-vfx.png" id="2_ererg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7tgf"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://u6v1rmv3f5tk"]
 
-[ext_resource type="Script" path="res://core/warpzone/WarpZone.gd" id="1_i0p2r"]
-[ext_resource type="Texture2D" uid="uid://b3fwbfo4itwyt" path="res://icon.png" id="2_tbrq5"]
+[ext_resource type="Script" uid="uid://b0em3ivm1x3p0" path="res://core/warpzone/WarpZone.gd" id="1_i0p2r"]
+[ext_resource type="Texture2D" uid="uid://d3jvl340jiveg" path="res://icon.png" id="2_tbrq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uuenw"]
 
