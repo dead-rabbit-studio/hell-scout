@@ -4,7 +4,7 @@ extends Node
 signal action_required(action: String)
 
 func _process(_delta):
-	compute(0.8, 1, 0)
+	compute([randf(), randf(), randf()], [randf(), randf(), randf()], [randf(), randf(), randf()])
 
 """
 Computes take the inputs and normalize it as a probability for an action.
@@ -15,15 +15,26 @@ Computes take the inputs and normalize it as a probability for an action.
    - bias: represents any value to improve when weight is zero
 """
 # TODO: Connect the param to receive some value like the player position and if the prize is near to him
-func compute(weight: float, params: float, bias: float) -> void:
-	var prediction = weight * params + bias
-	print("softmax prediction: " + str(prediction))
-	var softmax_denominator = softmax([prediction])
+func compute(params: Array[float], weight: Array[float], bias: Array[float]) -> void:
+	if(weight.size() != params.size() or weight.size() != bias.size()):
+		print("Error: weight, params and bias must have the same size.")
+		return
+
+	if(weight.size() == 0):
+		print("Error: weight, params and bias must not be empty.")
+		return
+
+	var prediction: Array[float] = []
+
+	for i in range(weight.size()):
+		prediction.append(weight[i] * params[i] + bias[i])
+
+	var softmax_denominator = softmax(prediction)
 
 	var action = choose_action(softmax_denominator)
 	action_required.emit(action)
 
-func softmax(predictions: Array, temperature: float = 1.0) -> Array:
+func softmax(predictions: Array, _temperature: float = 1.0) -> Array:
 	var max_value = predictions[0]
 	for i in range(1, predictions.size()):
 		if predictions[i] > max_value:
@@ -46,18 +57,17 @@ func softmax(predictions: Array, temperature: float = 1.0) -> Array:
 
 	
 func choose_action(probabilities: Array) -> String:
-	var rand_val = randf()
+	var selection_thrashold = randf() 
 	var cumulative = 0.0
 
 	var selected_action = -1
 
 	for i in range(probabilities.size()):
 		cumulative += probabilities[i]
-		if rand_val <= cumulative:
+		if selection_thrashold <= cumulative:
+			print("softmax selected action: " + str(i) + " with probability: " + str(probabilities[i]))
 			selected_action = i
 			break
-
-	selected_action = probabilities.size() - 1
 
 	if selected_action == -1:
 		selected_action = probabilities.size() - 1

@@ -325,7 +325,7 @@ vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_slq5d")
+&"": SubResource("AnimationLibrary_slq5d")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
