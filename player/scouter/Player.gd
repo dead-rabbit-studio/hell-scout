@@ -13,6 +13,7 @@ signal object_collected()
 @export var speed = 400.0
 @export var max_health = 110
 @export var is_alive = true
+@export var controller2: Controller
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _lastDirection: R.Directions = R.Directions.RIGHT

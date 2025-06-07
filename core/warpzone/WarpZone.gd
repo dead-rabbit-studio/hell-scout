@@ -15,52 +15,47 @@ func _on_body_entered(body: Player) -> void:
 	_handle_exit_direction(body)
 
 func _handle_exit_direction(body: Player) -> void:
-	var bodyWidth = body.player_area.shape.size.x
-	var bodyHeight = body.player_area.shape.size.y
+	var body_width = body.player_area.shape.size.x
+	var body_height = body.player_area.shape.size.y
 	var padding = 8
+	print("body is: " + str(body))
 	
 	if exit_zone != null:
 		print_debug("WARP: " + str(exit_zone.position) + " " + str(body.player_area.shape.size))
-		print_debug("WARP AFTERSUM: " + str(exit_zone.position + Vector2(bodyHeight, 0)))
+		print_debug("WARP AFTERSUM: " + str(exit_zone.position + Vector2(body_height, 0)))
 		
 		match exit_zone_direction:
 			WARP_DIRECTION.WARPABLE_DIRECTION:
 				var direction = body.get_current_direction()
 				match direction:
 					R.Directions.LEFT:
-						_warp_left(body, bodyWidth + padding)
+						warp_player(body, Vector2.LEFT, body_width + padding)
 					R.Directions.UP:
-						_warp_top(body, bodyWidth + padding)
+						warp_player(body, Vector2.UP, body_height + padding)
 					R.Directions.RIGHT:
-						_warp_right(body, bodyWidth + padding)
+						warp_player(body, Vector2.RIGHT, body_width + padding)
 					R.Directions.DOWN:
-						_warp_bottom(body, bodyWidth + padding)																					
+						warp_player(body, Vector2.DOWN, body_height + padding)
 			WARP_DIRECTION.TOP:
-				if body._currentDirectionVector.y >= 0:
-					_warp_top(body, bodyHeight + padding)
+				if body._current_direction_vector.y >= 0:
+					warp_player(body, Vector2.UP, body_height + padding)
 			WARP_DIRECTION.RIGHT:
-				if body._currentDirectionVector.x <= 0:
-					_warp_right(body, bodyWidth + padding)
+				if body._current_direction_vector.x <= 0:
+					warp_player(body, Vector2.RIGHT, body_width + padding)
 			WARP_DIRECTION.BOTTOM:
-				if body._currentDirectionVector.y <= 0:
-					_warp_bottom(body, bodyHeight + padding)
+				if body._current_direction_vector.y <= 0:
+					warp_player(body, Vector2.DOWN, body_height + padding)
 			WARP_DIRECTION.LEFT:
-				if body._currentDirectionVector.x >= 0:
-						_warp_left(body, bodyWidth + padding)
+				if body._current_direction_vector.x >= 0:
+					warp_player(body, Vector2.LEFT, body_width + padding)
 						
-#TODO: Replace these functions with just a warp(body, distance, flips and position)
-func _warp_top(body: Player, distance: float) -> void:
-	body.animated_sprite.flip_v = false
-	body.position = exit_zone.position - Vector2(0, distance) 
-	
-func _warp_right(body: Player, distance: float) -> void:
-	body.animated_sprite.flip_h = false
-	body.position = exit_zone.position + Vector2(distance, 0) 
+func warp_player(body: Player, direction: Vector2, distance: float) -> void:
+	direction = direction.normalized()
 
-func _warp_bottom(body: Player, distance: float) -> void:
-	body.animated_sprite.flip_v = true
-	body.position = exit_zone.position + Vector2(0, distance) 
+	if direction.x != 0:
+		body.scale.x = abs(body.scale.x) * sign(direction.x)
 
-func _warp_left(body: Player, distance: float) -> void:
-	body.animated_sprite.flip_h = true
-	body.position = exit_zone.position - Vector2(distance, 0) 
+	if direction.y != 0:
+		body.scale.y = abs(body.scale.y) * sign(direction.y)
+
+	body.position = exit_zone.position + direction * distance

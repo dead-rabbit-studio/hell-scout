@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bqatya17nk3wt" path="res://core/hit_detection/HurtBox.gd" id="4_dq1gf"]
 [ext_resource type="Script" uid="uid://c5k4ohg3rs6cm" path="res://player/scouter/Animator.gd" id="5_la07l"]
 [ext_resource type="Script" uid="uid://dk6c2ekjt03rb" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
-[ext_resource type="Script" uid="uid://yugrdeown74p" path="res://core/controller/ai_controller.gd" id="7_5ys7x"]
+[ext_resource type="Script" uid="uid://b764cfuwjod78" path="res://core/controller/input_controller.gd" id="7_japc8"]
 [ext_resource type="Script" uid="uid://dn0kpuxadkspe" path="res://player/scouter/neural_network.gd" id="8_lldpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
@@ -348,7 +348,7 @@ script = ExtResource("6_lvn4h")
 
 [node name="Controller" type="Node2D" parent="."]
 position = Vector2(1, 0)
-script = ExtResource("7_5ys7x")
+script = ExtResource("7_japc8")
 
 [node name="NeuralNetwork" type="Node" parent="."]
 script = ExtResource("8_lldpg")
