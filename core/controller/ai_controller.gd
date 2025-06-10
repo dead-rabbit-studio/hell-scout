@@ -1,15 +1,8 @@
 class_name AiController
 extends Controller
 
-func _choose_action() -> String:
-	var size: int = R.player_actions.keys().size()
-	var index: int = randi_range(0, size - 1)
-	var key: String = R.player_actions.keys()[index]
-	return R.player_actions[key] 
-
 func _random_direction() -> Vector2:
 	return Vector2(randi_range(-1, 1), randi_range(-1, 1))
-
 
 func _on_neural_network_action_required(action:String) -> void:
 	if is_enabled:

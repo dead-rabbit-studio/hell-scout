@@ -3,8 +3,11 @@ extends Node
 # Signal to interact usually with the Controller node, to notify when an action was choosed. 
 signal action_required(action: String)
 
+@export var is_enabled: bool = false
+
 func _process(_delta):
-	compute([randf(), randf(), randf()], [randf(), randf(), randf()], [randf(), randf(), randf()])
+	if is_enabled:
+		compute([randf(), randf(), randf()], [randf(), randf(), randf()], [randf(), randf(), randf()])
 
 """
 Computes take the inputs and normalize it as a probability for an action.
