@@ -8,11 +8,15 @@ enum WARP_DIRECTION { WARPABLE_DIRECTION, TOP, RIGHT, BOTTOM, LEFT}
 @export var exit_zone: WarpZone 
 @export var exit_zone_direction: WARP_DIRECTION
 
-func _on_body_entered(body: Player) -> void:
+func _on_body_entered(body: Node2D) -> void:
+	var player = body as Player
+	if player == null:
+		return
+		
 	if exit_zone != null:
-		body.position = exit_zone.position
+		player.position = exit_zone.position
 	
-	_handle_exit_direction(body)
+	_handle_exit_direction(player)
 
 func _handle_exit_direction(body: Player) -> void:
 	var body_width = body.player_area.shape.size.x

@@ -7,6 +7,8 @@
 
 [node name="WarpZone" type="Area2D"]
 scale = Vector2(1.29259, 1.00226)
+collision_layer = 0
+collision_mask = 1
 script = ExtResource("1_i0p2r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

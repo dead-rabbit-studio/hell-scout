@@ -304,6 +304,7 @@ script = ExtResource("6_f0rfs")
 
 [node name="Interactable" type="Area2D" parent="Level/Tree"]
 position = Vector2(1, 0)
+collision_layer = 0
 script = ExtResource("7_t4u6m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Tree/Interactable"]
