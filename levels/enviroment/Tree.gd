@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var info_label: Label = $InfoLabel
-@onready var player_area: CollisionShape2D = $PlayerArea/CollisionShape2D
 @onready var collectable: Collectable = $Collectable
 
 func _on_interactable_interaction() -> void:
