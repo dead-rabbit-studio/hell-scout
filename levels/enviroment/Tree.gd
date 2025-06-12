@@ -9,5 +9,5 @@ func _on_interactable_interaction() -> void:
 func _on_player_object_collected() -> void:
 	queue_free()
 
-func _on_interactable_area_entered(isSomethingInside:bool) -> void:
-	info_label.visible = isSomethingInside
+func _on_interactable_interaction_state_changed(is_interactable:bool) -> void:
+	info_label.visible = is_interactable

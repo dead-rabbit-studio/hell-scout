@@ -76,9 +76,6 @@ func _on_health_depleted():
 func _on_interactor_interacted() -> void:
 	object_collected.emit()
 
-func _on_interactable_area_entered(isSomethingInside:bool) -> void:
-	interactor.is_enabled = isSomethingInside
-
 func _on_controller_interact() -> void:
 	interactor.interact()
 
@@ -92,3 +89,7 @@ func _on_controller_attacked(_is_attacking:bool) -> void:
 
 func _on_controller_moved(direction:Vector2) -> void:
 	_move_player(direction)
+
+
+func _on_interactable_interaction_state_changed(is_interactable:bool) -> void:
+	interactor.is_enabled = is_interactable
