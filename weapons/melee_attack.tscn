@@ -58,7 +58,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ioh64")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 14.0
 }]

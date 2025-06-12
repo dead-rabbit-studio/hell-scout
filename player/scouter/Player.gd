@@ -17,7 +17,8 @@ signal object_collected()
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _last_direction: Vector2 = Vector2.RIGHT
 
-var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
+var _melee_attack_scene = preload(R.scenes.melee_attack)
+var _current_melee_attack: Area2D = null
 
 func take_damage(damage: float):
 	health.damage(damage)
@@ -25,19 +26,14 @@ func take_damage(damage: float):
 func die(): 
 	print_debug(R.strings.player_has_died)
 	controller.is_enabled = false
-	remove_child(_MeleeAttack)
+	if _current_melee_attack != null:
+		_current_melee_attack.queue_free()
+		_current_melee_attack = null
 	animation_tree.active = false
 
 func _ready() -> void : 
 	health.max_health = max_health
 	health.is_mortal = true
-	connect("changed_direction", _MeleeAttack._on_player_changed_direction)
-	connect("player_position_update", _MeleeAttack._on_player_position_update)
-
-func _process(_delta: float) -> void:
-	if is_alive:
-		if _MeleeAttack.get_parent() != null && !_MeleeAttack.is_attacking:
-			remove_child(_MeleeAttack)
 
 func _physics_process(_delta: float) -> void:
 	if !is_alive:
@@ -64,12 +60,15 @@ func _on_controller_interact() -> void:
 	interactor.interact()
 
 func _on_controller_attacked(_is_attacking:bool) -> void:
-	print("Player on controller attacked")
 	if _is_attacking and is_alive:
-		if _MeleeAttack.get_parent() == null:
-			add_child(_MeleeAttack)
-		print("attacking")
-	_MeleeAttack.attack(_is_attacking)
+		if _current_melee_attack == null:
+			_current_melee_attack = _melee_attack_scene.instantiate()
+			add_child(_current_melee_attack)
+			_current_melee_attack.connect("tree_exiting", func(): _current_melee_attack = null)
+			# Initialize the attack with current position and direction
+			_current_melee_attack._on_player_position_update(global_position)
+			_current_melee_attack._on_player_changed_direction(_last_direction)
+		_current_melee_attack.attack(_is_attacking)
 
 func _on_controller_moved(direction:Vector2) -> void:
 	_move_player(direction)
