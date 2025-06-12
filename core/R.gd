@@ -1,7 +1,5 @@
 class_name R
 
-enum Directions {UP, RIGHT, DOWN, LEFT}
-
 const player_actions = {
     "attack": "attack",
     "move_left": "move_left",

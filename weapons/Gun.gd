@@ -1,9 +1,8 @@
 extends Node
-enum GUN_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 signal gun_was_fired(bullet: RigidBody2D)
 
 @export var speed:int  = 1200
-@export var gun_direction: GUN_DIRECTION = GUN_DIRECTION.RIGHT 
+@export var gun_direction: Vector2 = Vector2.RIGHT
 
 const _gun_front_position: int = 25
 
@@ -17,26 +16,13 @@ func _shoot() -> void:
 	gun_was_fired.emit(bullet)
 	
 func _get_bullet_direction() -> Vector2:
-	return _gun_front_direction_to_vector2(1, gun_direction)
+	return gun_direction
 
 func _gun_position() -> Vector2:
-	return _gun_front_direction_to_vector2(_gun_front_position, gun_direction)
-	
-func _gun_front_direction_to_vector2(force: int, gunFrontDirection: GUN_DIRECTION) -> Vector2:
-	var resultVector: Vector2;
-	match(gunFrontDirection):
-		GUN_DIRECTION.LEFT: 
-			resultVector = Vector2(-force, 0);
-		GUN_DIRECTION.TOP:
-			resultVector = Vector2(0, -force);
-		GUN_DIRECTION.RIGHT:
-			resultVector = Vector2(force, 0);
-		GUN_DIRECTION.BOTTOM:
-			resultVector = Vector2(0, force)
-	return resultVector;
+	return gun_direction * _gun_front_position
 			
 func _on_bullet_spawner_timeout() -> void:
 	_shoot()	
 
-func _on_player_changed_direction(PLAYER_DIRECTION):
-	gun_direction = PLAYER_DIRECTION;
+func _on_player_changed_direction(direction: Vector2):
+	gun_direction = direction;

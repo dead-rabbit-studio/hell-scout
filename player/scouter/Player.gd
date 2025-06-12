@@ -1,7 +1,6 @@
 class_name Player extends CharacterBody2D
-enum PLAYER_DIRECTION { LEFT, TOP, RIGHT, BOTTOM }
 
-signal changed_direction(PLAYER_DIRECTION)
+signal changed_direction(direction: Vector2)
 signal player_position_update(Vector2)
 signal object_collected()
 
@@ -16,7 +15,7 @@ signal object_collected()
 @export var controller2: Controller
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
-var _lastDirection: R.Directions = R.Directions.RIGHT
+var _last_direction: Vector2 = Vector2.RIGHT
 
 var _MeleeAttack: Area2D = preload(R.scenes.melee_attack).instantiate()
 
@@ -46,29 +45,14 @@ func _physics_process(_delta: float) -> void:
 	
 func _move_player(direction: Vector2):
 	_current_direction_vector = direction
-	var player_direction: R.Directions = get_current_direction()
-
-	if player_direction != _lastDirection:
-		_lastDirection = player_direction
-		changed_direction.emit(_lastDirection)
+	
+	if _current_direction_vector != _last_direction and _current_direction_vector != Vector2.ZERO:
+		_last_direction = _current_direction_vector
+		changed_direction.emit(_last_direction)
 		
 	velocity = _current_direction_vector * speed
 	move_and_slide()
-	player_position_update.emit(global_position)
-	
-func get_current_direction() -> R.Directions: 
-	var playerDirection: R.Directions = _lastDirection;
-	
-	if _current_direction_vector == Vector2(-1, 0):
-		playerDirection = R.Directions.LEFT
-	if _current_direction_vector == Vector2(0, -1):
-		playerDirection = R.Directions.UP
-	if _current_direction_vector == Vector2(1, 0):
-		playerDirection = R.Directions.RIGHT
-	if _current_direction_vector == Vector2(0, 1):
-		playerDirection = R.Directions.DOWN
-	
-	return playerDirection; 
+	player_position_update.emit(global_position) 
 	
 func _on_health_depleted():
 	die()

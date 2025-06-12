@@ -1,7 +1,7 @@
 class_name MeleeAttack extends HitBox
 var is_attacking = false
 
-@export var attack_direction: R.Directions = R.Directions.RIGHT
+@export var attack_direction: Vector2 = Vector2.RIGHT
 @onready var _melee_area_shape: RectangleShape2D = $CollisionShape2D.shape as RectangleShape2D
 @onready var _attack_vfx = $AttackVfx
 var player_position: Vector2 = Vector2.ZERO
@@ -21,31 +21,26 @@ func attack(attacking) -> void:
         var flip_h = false
         var flip_v = false
         
-        match attack_direction:
-            R.Directions.LEFT:
-                _set_attack_position(Vector2(-melee_attack_horizontal_size.x, 0))
-                _set_attack_shape(melee_attack_horizontal_size)
-                _attack_vfx.rotation = 0
-                flip_h = true
-            
-            R.Directions.UP:
-                _set_attack_position(Vector2(0, -melee_attack_vertical_size.y))
-                _set_attack_shape(melee_attack_vertical_size)
-                _attack_vfx.rotation = -90
-                # Remove the direct flip_v assignment here
-                flip_v = true
-            
-            R.Directions.RIGHT:
-                _set_attack_position(Vector2(melee_attack_horizontal_size.x, 0))
-                _set_attack_shape(melee_attack_horizontal_size)
-                _attack_vfx.rotation = 0
-                flip_h = false
-            
-            R.Directions.DOWN:
-                _set_attack_position(Vector2(0, melee_attack_vertical_size.y))
-                _set_attack_shape(melee_attack_vertical_size)
-                _attack_vfx.rotation = 90
-                flip_v = true
+        if attack_direction == Vector2.LEFT:
+            _set_attack_position(Vector2(-melee_attack_horizontal_size.x, 0))
+            _set_attack_shape(melee_attack_horizontal_size)
+            _attack_vfx.rotation = 0
+            flip_h = true
+        elif attack_direction == Vector2.UP:
+            _set_attack_position(Vector2(0, -melee_attack_vertical_size.y))
+            _set_attack_shape(melee_attack_vertical_size)
+            _attack_vfx.rotation = -90
+            flip_v = true
+        elif attack_direction == Vector2.RIGHT:
+            _set_attack_position(Vector2(melee_attack_horizontal_size.x, 0))
+            _set_attack_shape(melee_attack_horizontal_size)
+            _attack_vfx.rotation = 0
+            flip_h = false
+        elif attack_direction == Vector2.DOWN:
+            _set_attack_position(Vector2(0, melee_attack_vertical_size.y))
+            _set_attack_shape(melee_attack_vertical_size)
+            _attack_vfx.rotation = 90
+            flip_v = true
     
         _attack_vfx.flip_h = flip_h
         _attack_vfx.flip_v = flip_v
@@ -56,8 +51,8 @@ func _set_attack_position(new_position: Vector2) -> void:
 func _set_attack_shape(size: Vector2) -> void:
     _melee_area_shape.size = size
 
-func _on_player_changed_direction(player_direction):
-    attack_direction = player_direction;
+func _on_player_changed_direction(direction: Vector2):
+    attack_direction = direction;
 	
 func _on_player_position_update(player_position_update: Vector2):
     player_position = player_position_update

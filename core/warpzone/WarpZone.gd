@@ -30,16 +30,15 @@ func _handle_exit_direction(body: Player) -> void:
 		
 		match exit_zone_direction:
 			WARP_DIRECTION.WARPABLE_DIRECTION:
-				var direction = body.get_current_direction()
-				match direction:
-					R.Directions.LEFT:
-						warp_player(body, Vector2.LEFT, body_width + padding)
-					R.Directions.UP:
-						warp_player(body, Vector2.UP, body_height + padding)
-					R.Directions.RIGHT:
-						warp_player(body, Vector2.RIGHT, body_width + padding)
-					R.Directions.DOWN:
-						warp_player(body, Vector2.DOWN, body_height + padding)
+				var direction = body._current_direction_vector
+				if direction == Vector2.LEFT:
+					warp_player(body, Vector2.LEFT, body_width + padding)
+				elif direction == Vector2.UP:
+					warp_player(body, Vector2.UP, body_height + padding)
+				elif direction == Vector2.RIGHT:
+					warp_player(body, Vector2.RIGHT, body_width + padding)
+				elif direction == Vector2.DOWN:
+					warp_player(body, Vector2.DOWN, body_height + padding)
 			WARP_DIRECTION.TOP:
 				if body._current_direction_vector.y >= 0:
 					warp_player(body, Vector2.UP, body_height + padding)
