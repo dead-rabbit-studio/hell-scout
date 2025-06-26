@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://u6v1rmv3f5tk"]
 
-[ext_resource type="Script" uid="uid://b0em3ivm1x3p0" path="res://core/warpzone/WarpZone.gd" id="1_i0p2r"]
+[ext_resource type="Script" path="res://core/warpzone/WarpZone.gd" id="1_i0p2r"]
 [ext_resource type="Texture2D" uid="uid://d3jvl340jiveg" path="res://icon.png" id="2_tbrq5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uuenw"]
@@ -8,7 +8,6 @@
 [node name="WarpZone" type="Area2D"]
 scale = Vector2(1.29259, 1.00226)
 collision_layer = 0
-collision_mask = 1
 script = ExtResource("1_i0p2r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
