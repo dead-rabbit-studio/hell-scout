@@ -54,11 +54,4 @@ func _handle_exit_direction(body: Player) -> void:
 						
 func warp_player(body: Player, direction: Vector2, distance: float) -> void:
 	direction = direction.normalized()
-
-	if direction.x != 0:
-		body.scale.x = abs(body.scale.x) * sign(direction.x)
-
-	if direction.y != 0:
-		body.scale.y = abs(body.scale.y) * sign(direction.y)
-
 	body.position = exit_zone.position + direction * distance
