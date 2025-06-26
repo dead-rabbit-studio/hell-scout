@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://vmf48gd83jhq"]
 
-[ext_resource type="Script" uid="uid://cthlh5g8p4br2" path="res://npcs/creeper/Creeper.gd" id="1_rs1m7"]
+[ext_resource type="Script" path="res://npcs/creeper/Creeper.gd" id="1_rs1m7"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="2_vvum0"]
-[ext_resource type="Script" uid="uid://bqatya17nk3wt" path="res://core/hit_detection/HurtBox.gd" id="3_61h3e"]
-[ext_resource type="Script" uid="uid://q3hb2mfmsi77" path="res://core/hit_detection/HitBox.gd" id="4_212rs"]
+[ext_resource type="Script" path="res://core/hit_detection/HurtBox.gd" id="3_61h3e"]
+[ext_resource type="Script" path="res://core/hit_detection/HitBox.gd" id="4_212rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wbb6"]
 size = Vector2(16, 16)
