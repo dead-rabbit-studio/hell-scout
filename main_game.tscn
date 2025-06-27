@@ -282,6 +282,7 @@ tile_set = SubResource("TileSet_qj47d")
 position = Vector2(79, 172)
 collision_mask = 3
 speed = 250.0
+is_alive = true
 
 [node name="Gun" parent="Level/Player" instance=ExtResource("2_be4gn")]
 
