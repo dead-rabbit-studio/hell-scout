@@ -10,7 +10,7 @@ Contains all weapon-related implementations and assets.
 - `melee-attack-vfx.png` - Visual effects for melee attacks
 
 ### Ranged Weapon System
-- `Gun.gd` - Ranged weapon implementation
+- `gun.gd` - Ranged weapon implementation
 - `gun.tscn` - Gun scene configuration
 - `bullet.gd` - Projectile implementation
 - `bullet.tscn` - Bullet scene configuration

@@ -7,10 +7,10 @@ Contains all player-related implementations and assets.
 ### Scouter
 The main player character implementation.
 
-- `Player.gd` - Main player character logic
+- `player.gd` - Main player character logic
 - `player.tscn` - Player scene configuration
-- `Animator.gd` - Player animation controller
-- `Animations.gd` - Animation state definitions
+- `animator.gd` - Player animation controller
+- `animations.gd` - Animation state definitions
 - `neural_network.gd` - AI assistance system for player
 
 ## Key Features

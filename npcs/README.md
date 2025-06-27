@@ -5,7 +5,7 @@ Contains all non-player character implementations and assets.
 ## Structure
 
 ### Creeper NPC
-- `Creeper.gd` - Creeper enemy implementation
+- `creeper.gd` - Creeper enemy implementation
 - `creeper.tscn` - Creeper scene configuration
 
 ## Features

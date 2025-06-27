@@ -4,7 +4,7 @@ This directory contains the core game systems and mechanics that form the founda
 
 ## Directory Structure
 
-- `R.gd` - Global resource constants and configuration
+- `r.gd` - Global resource constants and configuration
 - `controller/` - Input and AI controller implementations
 - `health/` - Health and damage system
 - `hit_detection/` - Combat hit detection system

@@ -5,15 +5,15 @@ Contains all level-related content and environment assets.
 ## Structure
 
 ### Environment
-- `Tree.gd` - Interactive tree object implementation
+- `tree.gd` - Interactive tree object implementation
 - `spritessheet/` - Character and object sprites
 - `tilemap/` - Level tilemap assets
   - House floors and walls
   - House props and decorations
 
 ### Core Files
-- `Level.gd` - Base level implementation
-- `LevelStatus.gd` - Level state management
+- `level.gd` - Base level implementation
+- `level_status.gd` - Level state management
 
 ## Features
 
@@ -36,8 +36,8 @@ Contains all level-related content and environment assets.
 
 To create a new level:
 
-1. Create a new scene with a root node inheriting from `Level.gd`
+1. Create a new scene with a root node inheriting from `level.gd`
 2. Set up the tilemap using assets from `tilemap/`
 3. Add interactive objects and collectibles
 4. Configure level transitions using warp zones
-5. Set up the level status using `LevelStatus.gd`
+5. Set up the level status using `level_status.gd`

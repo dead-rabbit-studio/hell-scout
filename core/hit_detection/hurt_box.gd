@@ -6,8 +6,9 @@ extends Area2D
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
-func _on_area_entered(hitbox: HitBox) -> void:
+func _on_area_entered(hitbox: Area2D) -> void:
 	if hitbox == null:
 		return
-		
-	health.damage(hitbox.damage)
+
+	if hitbox is HitBox:
+		health.damage(hitbox.damage)

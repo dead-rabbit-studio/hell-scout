@@ -4,7 +4,7 @@ The health system manages entity health, damage, and death mechanics.
 
 ## Components
 
-- `Health.gd` - Core health system implementation
+- `health.gd` - Core health system implementation
 - `health.tscn` - Health component scene
 
 ## Features

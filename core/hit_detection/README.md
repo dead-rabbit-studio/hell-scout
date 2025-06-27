@@ -5,13 +5,13 @@ Implements combat hit detection through HitBox and HurtBox components.
 ## Components
 
 ### HitBox
-- `HitBox.gd` - Offensive collision area
+- `hit_box.gd` - Offensive collision area
 - Manages damage dealing
 - Configurable damage values
 - Hit detection signals
 
 ### HurtBox
-- `HurtBox.gd` - Vulnerable collision area
+- `hurt_box.gd` - Vulnerable collision area
 - Manages damage receiving
 - Invincibility frame support
 - Damage type handling
