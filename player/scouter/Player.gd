@@ -34,7 +34,7 @@ func _ready() -> void :
 	health.max_health = max_health
 	health.is_mortal = true
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !is_alive:
 		health.kill()
 	
