@@ -4,7 +4,6 @@ var is_attacking = false
 @export var attack_direction: Vector2 = Vector2.RIGHT
 @onready var _melee_area_shape: RectangleShape2D = $CollisionShape2D.shape as RectangleShape2D
 @onready var _attack_vfx = $AttackVfx
-var player_position: Vector2 = Vector2.ZERO
 
 func attack(attacking) -> void:
 	print_debug("Attack called with: ", attacking)
@@ -48,8 +47,10 @@ func attack(attacking) -> void:
 		print_debug("Animation started playing: ", _attack_vfx.is_playing())
 
 func _set_attack_position(new_position: Vector2) -> void:
-	global_position = player_position + new_position
-	print_debug("Set attack position to: ", global_position)
+	var player = get_parent()
+	if player is Player:
+		global_position = player.global_position + new_position
+		print_debug("Set attack position to: ", global_position)
 
 func _set_attack_shape(size: Vector2) -> void:
 	_melee_area_shape.size = size
@@ -58,9 +59,6 @@ func _on_player_changed_direction(direction: Vector2):
 	print_debug("Direction changed to: ", direction)
 	attack_direction = direction
 	
-func _on_player_position_update(player_position_update: Vector2):
-	player_position = player_position_update
-
 func _on_attack_vfx_animation_finished() -> void:
 	print_debug("Animation finished")
 	_attack_vfx.pause()

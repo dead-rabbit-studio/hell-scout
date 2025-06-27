@@ -1,13 +1,13 @@
 [gd_scene load_steps=38 format=3 uid="uid://xse6umb621tq"]
 
-[ext_resource type="Script" path="res://player/scouter/Player.gd" id="1_opm3m"]
+[ext_resource type="Script" uid="uid://bt7411bkd8o8r" path="res://player/scouter/Player.gd" id="1_opm3m"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
 [ext_resource type="Texture2D" uid="uid://dwgylbrkaa5ex" path="res://levels/enviroment/spritessheet/scouter_spritesheet2.png" id="4_3ngsw"]
-[ext_resource type="Script" path="res://core/hit_detection/HurtBox.gd" id="4_dq1gf"]
-[ext_resource type="Script" path="res://player/scouter/Animator.gd" id="5_la07l"]
-[ext_resource type="Script" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
-[ext_resource type="Script" path="res://core/controller/input_controller.gd" id="7_japc8"]
-[ext_resource type="Script" path="res://player/scouter/neural_network.gd" id="8_lldpg"]
+[ext_resource type="Script" uid="uid://bqatya17nk3wt" path="res://core/hit_detection/HurtBox.gd" id="4_dq1gf"]
+[ext_resource type="Script" uid="uid://c5k4ohg3rs6cm" path="res://player/scouter/Animator.gd" id="5_la07l"]
+[ext_resource type="Script" uid="uid://dk6c2ekjt03rb" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
+[ext_resource type="Script" uid="uid://b764cfuwjod78" path="res://core/controller/input_controller.gd" id="7_japc8"]
+[ext_resource type="Script" uid="uid://dn0kpuxadkspe" path="res://player/scouter/neural_network.gd" id="8_lldpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmx7v"]
 size = Vector2(24, 5)
@@ -187,12 +187,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_slq5d"]
 _data = {
-"RESET": SubResource("Animation_xo5ir"),
-"idle": SubResource("Animation_m6b5m"),
-"idle_left": SubResource("Animation_5jaxh"),
-"idle_right": SubResource("Animation_n01ke"),
-"runnin_left": SubResource("Animation_jxtre"),
-"running": SubResource("Animation_b2t2j")
+&"RESET": SubResource("Animation_xo5ir"),
+&"idle": SubResource("Animation_m6b5m"),
+&"idle_left": SubResource("Animation_5jaxh"),
+&"idle_right": SubResource("Animation_n01ke"),
+&"runnin_left": SubResource("Animation_jxtre"),
+&"running": SubResource("Animation_b2t2j")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_akp3l"]
@@ -291,8 +291,6 @@ graph_offset = Vector2(-106.71, -104.37)
 [node name="Player" type="CharacterBody2D"]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
-speed = null
-max_health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.5)
@@ -327,7 +325,7 @@ vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_slq5d")
+&"": SubResource("AnimationLibrary_slq5d")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

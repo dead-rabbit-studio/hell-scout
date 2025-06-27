@@ -1,7 +1,6 @@
 class_name Player extends CharacterBody2D
 
 signal changed_direction(direction: Vector2)
-signal player_position_update(Vector2)
 signal object_collected()
 
 @onready var player_area: CollisionShape2D = $PlayerArea/CollisionShape2D
@@ -48,7 +47,6 @@ func _move_player(direction: Vector2):
 		
 	velocity = _current_direction_vector * speed
 	move_and_slide()
-	player_position_update.emit(global_position) 
 	
 func _on_health_depleted():
 	die()
@@ -65,8 +63,6 @@ func _on_controller_attacked(_is_attacking:bool) -> void:
 			_current_melee_attack = _melee_attack_scene.instantiate()
 			add_child(_current_melee_attack)
 			_current_melee_attack.connect("tree_exiting", func(): _current_melee_attack = null)
-			# Initialize the attack with current position and direction
-			_current_melee_attack._on_player_position_update(global_position)
 			_current_melee_attack._on_player_changed_direction(_last_direction)
 		_current_melee_attack.attack(_is_attacking)
 
