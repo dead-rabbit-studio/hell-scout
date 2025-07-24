@@ -1,10 +1,10 @@
 [gd_scene load_steps=38 format=3 uid="uid://xse6umb621tq"]
 
-[ext_resource type="Script" uid="uid://bt7411bkd8o8r" path="res://player/scouter/Player.gd" id="1_opm3m"]
+[ext_resource type="Script" uid="uid://bt7411bkd8o8r" path="res://player/scouter/player.gd" id="1_opm3m"]
 [ext_resource type="PackedScene" uid="uid://brwx716xc22gp" path="res://core/health/health.tscn" id="3_c7lcy"]
 [ext_resource type="Texture2D" uid="uid://dwgylbrkaa5ex" path="res://levels/enviroment/spritessheet/scouter_spritesheet2.png" id="4_3ngsw"]
 [ext_resource type="Script" uid="uid://bqatya17nk3wt" path="res://core/hit_detection/hurt_box.gd" id="4_dq1gf"]
-[ext_resource type="Script" uid="uid://c5k4ohg3rs6cm" path="res://player/scouter/Animator.gd" id="5_la07l"]
+[ext_resource type="Script" uid="uid://c5k4ohg3rs6cm" path="res://player/scouter/animator.gd" id="5_la07l"]
 [ext_resource type="Script" uid="uid://dk6c2ekjt03rb" path="res://core/interaction/interactor.gd" id="6_lvn4h"]
 [ext_resource type="Script" uid="uid://b764cfuwjod78" path="res://core/controller/input_controller.gd" id="7_japc8"]
 [ext_resource type="Script" uid="uid://dn0kpuxadkspe" path="res://player/scouter/neural_network.gd" id="8_lldpg"]
