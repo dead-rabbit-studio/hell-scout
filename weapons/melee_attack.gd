@@ -6,10 +6,7 @@ var is_attacking = false
 @onready var _attack_vfx = $AttackVfx
 
 func attack(attacking) -> void:
-	print_debug("Attack called with: ", attacking)
-	
 	if _attack_vfx.is_playing():
-		print_debug("Attack animation already playing")
 		return
 		
 	is_attacking = attacking
@@ -40,27 +37,26 @@ func attack(attacking) -> void:
 			_attack_vfx.rotation = 90
 			flip_v = true
 		
-		print_debug("Playing attack animation in direction: ", attack_direction)
 		_attack_vfx.flip_h = flip_h
 		_attack_vfx.flip_v = flip_v
 		_attack_vfx.play("attack")
-		print_debug("Animation started playing: ", _attack_vfx.is_playing())
+
 
 func _set_attack_position(new_position: Vector2) -> void:
 	var player = get_parent()
 	if player is Player:
 		global_position = player.global_position + new_position
-		print_debug("Set attack position to: ", global_position)
+
 
 func _set_attack_shape(size: Vector2) -> void:
 	_melee_area_shape.size = size
 
+
 func _on_player_changed_direction(direction: Vector2):
-	print_debug("Direction changed to: ", direction)
 	attack_direction = direction
+
 	
 func _on_attack_vfx_animation_finished() -> void:
-	print_debug("Animation finished")
 	_attack_vfx.pause()
 	_attack_vfx.frame_progress = 0
 	queue_free()

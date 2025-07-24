@@ -64,7 +64,6 @@ animations = [{
 }]
 
 [node name="MeleeAttack" type="Area2D"]
-position = Vector2(16, 32)
 collision_mask = 2
 priority = -1
 script = ExtResource("1_i0l7d")
@@ -77,5 +76,6 @@ debug_color = Color(0.894118, 0.192157, 0.639216, 0.419608)
 sprite_frames = SubResource("SpriteFrames_7yqwb")
 animation = &"attack"
 frame_progress = 0.474806
+speed_scale = 2.5
 
 [connection signal="animation_finished" from="AttackVfx" to="." method="_on_attack_vfx_animation_finished"]
