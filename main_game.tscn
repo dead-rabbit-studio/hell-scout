@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=4 uid="uid://deqtmks54a4u7"]
+[gd_scene load_steps=20 format=4 uid="uid://deqtmks54a4u7"]
 
+[ext_resource type="Script" uid="uid://cpfv44y4q8b4e" path="res://main_game.gd" id="1_02kkc"]
 [ext_resource type="PackedScene" uid="uid://xse6umb621tq" path="res://player/scouter/player.tscn" id="1_4phlm"]
 [ext_resource type="PackedScene" uid="uid://eyt6qixfequa" path="res://weapons/gun.tscn" id="2_be4gn"]
 [ext_resource type="Script" uid="uid://bk236slgnlg7t" path="res://levels/level.gd" id="2_igq84"]
@@ -10,25 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b0b8d8ta3fpkd" path="res://levels/enviroment/tilemap/house_props.png" id="8_junl8"]
 [ext_resource type="Script" uid="uid://3v0t2chxfgio" path="res://collectable.gd" id="9_hlbds"]
 [ext_resource type="PackedScene" uid="uid://vmf48gd83jhq" path="res://npcs/creeper/creeper.tscn" id="10_mf81u"]
-
-[sub_resource type="GDScript" id="GDScript_36clq"]
-script/source = "extends Node2D
-
-@onready var gameOverLabel:Label = $GUI/GameOverLabel
-
-func on_game_over(): 
-	gameOverLabel.visible = true
-
-func _on_gun_gun_was_fired(bullet: Node2D) -> void:
-	add_child(bullet)
-
-func _on_level_level_status_change(levelStatus: int) -> void:
-	if(levelStatus == LevelStatus.LOST):
-		on_game_over()
-
-func _on_interactable_object_interaction() -> void:
-	pass # Replace with function body.
-"
+[ext_resource type="Script" uid="uid://blsqls3355u28" path="res://player_hud.gd" id="12_aomqu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hw3xp"]
 texture = ExtResource("2_owhbo")
@@ -265,11 +248,15 @@ font_size = 12
 [sub_resource type="LabelSettings" id="LabelSettings_kfjol"]
 font_color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="Main Game" type="Node2D"]
-script = SubResource("GDScript_36clq")
+[node name="Main Game" type="Node2D" node_paths=PackedStringArray("level", "player_hud")]
+script = ExtResource("1_02kkc")
+level = NodePath("Level")
+player_hud = NodePath("GUI/PlayerHUD")
 
-[node name="Level" type="Node2D" parent="."]
+[node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("player", "mob_spawner")]
 script = ExtResource("2_igq84")
+player = NodePath("Player")
+mob_spawner = NodePath("MobSpawner")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Level"]
 use_parent_material = true
@@ -339,25 +326,40 @@ position = Vector2(575, 188)
 exit_zone = NodePath("../WarpZoneLivingRoomExit")
 exit_zone_direction = 4
 
-[node name="GUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Creeper" parent="Level" instance=ExtResource("10_mf81u")]
+position = Vector2(658, 68)
+
+[node name="GUI" type="CanvasLayer" parent="."]
 metadata/_edit_use_anchors_ = true
 
-[node name="GameOverLabel" type="Label" parent="GUI"]
+[node name="PlayerHUD" type="MarginContainer" parent="GUI" node_paths=PackedStringArray("hp_label")]
+offset_right = 85.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+script = ExtResource("12_aomqu")
+hp_label = NodePath("HP")
+
+[node name="HP" type="Label" parent="GUI/PlayerHUD"]
+layout_mode = 2
+
+[node name="GameOverScreen" type="CenterContainer" parent="GUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -20.0
+offset_right = 46.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="GUI/GameOverScreen"]
 visible = false
-layout_mode = 0
-offset_left = 529.0
-offset_top = 309.0
-offset_right = 621.0
-offset_bottom = 335.0
+layout_mode = 2
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_kfjol")
-
-[node name="Creeper" parent="." instance=ExtResource("10_mf81u")]
-position = Vector2(658, 68)
 
 [connection signal="level_status_change" from="Level" to="." method="_on_level_level_status_change"]
 [connection signal="changed_direction" from="Level/Player" to="Level/Player/Gun" method="_on_player_changed_direction"]

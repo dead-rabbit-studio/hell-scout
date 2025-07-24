@@ -1,14 +1,18 @@
+class_name LevelController
 extends Node2D
 
 signal level_status_change(int)
+signal player_health_changed(int)
 
-@onready var player: Player = $Player
-@onready var mob_spawner: Timer = $MobSpawner
+@export var player: Player 
+@export var mob_spawner: Timer 
 
 var CreeperClass = preload('res://npcs/creeper/creeper.tscn')
 
-func _ready() -> void:
+
+func _enter_tree() -> void:
 	player.health.depleted.connect(_on_player_health_depleted)
+	player.health_changed.connect(_on_player_health_changed)
 
 func _on_gun_gun_was_fired(bullet: RigidBody2D) -> void:
 	add_child(bullet) 
@@ -43,6 +47,8 @@ func _get_spawn_position_inside_area(player_position:Vector2, radius: float) -> 
 	
 	return Vector2(x, y)
 
+func  _on_player_health_changed(current_hp: int) -> void:
+	player_health_changed.emit(current_hp)
 
 func _on_interactable_on_interaction_area_entered() -> void:
 	pass # Replace with function body.

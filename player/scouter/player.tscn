@@ -288,9 +288,12 @@ states/Running/position = Vector2(674.66, 31.5984)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ymc3b"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_0u0vw"), "Running", "End", SubResource("AnimationNodeStateMachineTransition_qatgo"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_rubwj")]
 graph_offset = Vector2(-106.71, -104.37)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health", "controller")]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
+max_health = 3
+health = NodePath("Health")
+controller = NodePath("Controller")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13.5)
@@ -299,6 +302,7 @@ debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Health" parent="." instance=ExtResource("3_c7lcy")]
 ignore_damage = true
+max_health = 3
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_mask = 8
@@ -353,9 +357,13 @@ script = ExtResource("7_japc8")
 [node name="NeuralNetwork" type="Node" parent="."]
 script = ExtResource("8_lldpg")
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]
 [connection signal="attacked" from="Controller" to="." method="_on_controller_attacked"]
 [connection signal="interact" from="Controller" to="." method="_on_controller_interact"]
 [connection signal="moved" from="Controller" to="." method="_on_controller_moved"]
 [connection signal="action_required" from="NeuralNetwork" to="Controller" method="_on_neural_network_action_required"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
