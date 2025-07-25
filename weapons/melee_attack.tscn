@@ -63,10 +63,11 @@ animations = [{
 "speed": 14.0
 }]
 
-[node name="MeleeAttack" type="Area2D"]
+[node name="MeleeAttack" type="Area2D" node_paths=PackedStringArray("_attack_vfx")]
 collision_mask = 2
 priority = -1
 script = ExtResource("1_i0l7d")
+_attack_vfx = NodePath("AttackVfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b7tgf")

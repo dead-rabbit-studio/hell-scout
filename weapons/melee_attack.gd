@@ -1,9 +1,10 @@
 class_name MeleeAttack extends HitBox
 var is_attacking = false
 
+@export var _attack_vfx: AnimatedSprite2D
 @export var attack_direction: Vector2 = Vector2.RIGHT
+
 @onready var _melee_area_shape: RectangleShape2D = $CollisionShape2D.shape as RectangleShape2D
-@onready var _attack_vfx = $AttackVfx
 
 func attack(attacking) -> void:
 	if _attack_vfx.is_playing():
@@ -55,7 +56,7 @@ func _set_attack_shape(size: Vector2) -> void:
 func _on_player_changed_direction(direction: Vector2):
 	attack_direction = direction
 
-	
+
 func _on_attack_vfx_animation_finished() -> void:
 	_attack_vfx.pause()
 	_attack_vfx.frame_progress = 0

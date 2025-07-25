@@ -288,15 +288,15 @@ states/Running/position = Vector2(674.66, 31.5984)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ymc3b"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_0u0vw"), "Running", "End", SubResource("AnimationNodeStateMachineTransition_qatgo"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_rubwj")]
 graph_offset = Vector2(-106.71, -104.37)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health", "controller")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health", "controller") groups=["Player"]]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
 max_health = 3
 health = NodePath("Health")
 controller = NodePath("Controller")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+position = Vector2(2, 13.5)
 shape = SubResource("RectangleShape2D_lmx7v")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
@@ -314,8 +314,9 @@ position = Vector2(-0.5, 6.5)
 shape = SubResource("RectangleShape2D_17k8b")
 debug_color = Color(0.984314, 0, 0.345098, 0.419608)
 
-[node name="PlayerArea" type="Area2D" parent="."]
+[node name="PlayerArea" type="Area2D" parent="." groups=["Player"]]
 visible = false
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
 position = Vector2(0, 3.5)
