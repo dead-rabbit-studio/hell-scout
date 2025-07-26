@@ -14,6 +14,9 @@ func _on_neural_network_action_required(action:String) -> void:
 				R.player_actions.interact:
 					print("AI Controller interact")
 					interact.emit()
+				R.player_actions.dash:
+					print("AI Controller dash")
+					dash.emit()
 				action when action.contains("move"):
 					print("AI Controller moved")
 					moved.emit(_random_direction())

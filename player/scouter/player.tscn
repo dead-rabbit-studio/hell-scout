@@ -288,12 +288,15 @@ states/Running/position = Vector2(674.66, 31.5984)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ymc3b"), "Running", "Idle", SubResource("AnimationNodeStateMachineTransition_0u0vw"), "Running", "End", SubResource("AnimationNodeStateMachineTransition_qatgo"), "Idle", "Running", SubResource("AnimationNodeStateMachineTransition_rubwj")]
 graph_offset = Vector2(-106.71, -104.37)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health", "controller") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_area", "health", "controller", "dash_duration_timer", "dash_cooldown_timer") groups=["Player"]]
 platform_wall_layers = 51
 script = ExtResource("1_opm3m")
 max_health = 3
+player_area = NodePath("PlayerArea/CollisionShape2D")
 health = NodePath("Health")
 controller = NodePath("Controller")
+dash_duration_timer = NodePath("Dash/DashDurationTimer")
+dash_cooldown_timer = NodePath("Dash/DashCoolDown")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2(2, 13.5)
@@ -361,10 +364,20 @@ script = ExtResource("8_lldpg")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Dash" type="Node" parent="."]
+
+[node name="DashDurationTimer" type="Timer" parent="Dash"]
+one_shot = true
+
+[node name="DashCoolDown" type="Timer" parent="Dash"]
+
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]
 [connection signal="attacked" from="Controller" to="." method="_on_controller_attacked"]
+[connection signal="dash" from="Controller" to="." method="_on_controller_dash"]
 [connection signal="interact" from="Controller" to="." method="_on_controller_interact"]
 [connection signal="moved" from="Controller" to="." method="_on_controller_moved"]
 [connection signal="action_required" from="NeuralNetwork" to="Controller" method="_on_neural_network_action_required"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Dash/DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
+[connection signal="timeout" from="Dash/DashCoolDown" to="." method="_on_dash_cool_down_timeout"]

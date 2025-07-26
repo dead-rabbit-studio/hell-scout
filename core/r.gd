@@ -6,7 +6,8 @@ const player_actions = {
     "move_up": "move_up",
     "move_right": "move_right",
     "move_down": "move_down",
-    "interact": "interact"
+    "interact": "interact",
+    "dash": "dash"
 }
 
 const scenes = {

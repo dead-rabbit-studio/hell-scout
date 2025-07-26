@@ -6,6 +6,8 @@ signal attacked(is_attacking: bool)
 signal interact
 @warning_ignore("unused_signal")
 signal moved(direction: Vector2)
+@warning_ignore("unused_signal")
+signal dash()
 
 var is_attacking = false
 var is_enabled = true

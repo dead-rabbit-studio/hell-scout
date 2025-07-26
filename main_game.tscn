@@ -266,7 +266,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAE
 tile_set = SubResource("TileSet_qj47d")
 
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
-position = Vector2(720, 190)
+position = Vector2(657, 178)
 collision_mask = 3
 speed = 250.0
 
@@ -327,7 +327,7 @@ exit_zone = NodePath("../WarpZoneLivingRoomExit")
 exit_zone_direction = 4
 
 [node name="Creeper" parent="Level" instance=ExtResource("10_mf81u")]
-position = Vector2(648, 263)
+position = Vector2(727, 140)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 metadata/_edit_use_anchors_ = true

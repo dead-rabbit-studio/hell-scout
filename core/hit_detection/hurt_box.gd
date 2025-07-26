@@ -11,4 +11,5 @@ func _on_area_entered(hitbox: Area2D) -> void:
 		return
 
 	if hitbox is HitBox:
+		print_debug("taking damage: ", hitbox.damage)
 		health.damage(hitbox.damage)

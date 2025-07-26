@@ -8,6 +8,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			attacked.emit(false)
 		if event.is_action_released(R.player_actions.interact):
 			interact.emit()
+		if event.is_action_released(R.player_actions.dash):
+			dash.emit()
 
 func _process(_delta):
 	if is_enabled:

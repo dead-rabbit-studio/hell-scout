@@ -4,22 +4,28 @@ signal health_changed(int)
 signal changed_direction(direction: Vector2)
 signal object_collected()
 
-@onready var player_area: CollisionShape2D = $PlayerArea/CollisionShape2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var interactor: Interactor = $Interactor
 
-@export var speed = 400.0
-@export var max_health = 110
-@export var is_alive = true
-@export var is_imortal = true
+@export var speed:float = 400.0
+@export var dash_speed:float  = 1200.0
+@export var max_health:int = 110
+@export var is_alive: bool = true
+@export var is_imortal: bool = true
+@export var player_area: CollisionShape2D
 @export var health: Health
 @export var controller: Controller
+@export var dash_duration_timer: Timer
+@export var dash_cooldown_timer: Timer
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _last_direction: Vector2 = Vector2.RIGHT
 
 var _melee_attack_scene = preload(R.scenes.melee_attack)
 var _current_melee_attack: Area2D = null
+var _is_dashing: bool = false
+var _dash_cooldown: bool = false
+
 
 func take_damage(damage: float):
 	health.damage(damage)
@@ -53,10 +59,17 @@ func _move_player(direction: Vector2):
 	if _current_direction_vector != _last_direction and _current_direction_vector != Vector2.ZERO:
 		_last_direction = _current_direction_vector
 		changed_direction.emit(_last_direction)
-		
-	velocity = _current_direction_vector * speed
-	move_and_slide()
+
 	
+	var current_speed = 0
+	if _is_dashing:
+		current_speed = dash_speed
+	else:
+		current_speed = speed
+
+	velocity = _current_direction_vector * current_speed
+	move_and_slide()
+
 
 func _on_health_depleted():
 	die()
@@ -90,3 +103,23 @@ func _on_interactable_interaction_state_changed(is_interactable:bool) -> void:
 
 func _on_timer_timeout() -> void:
 	take_damage(1)
+
+
+func _on_controller_dash() -> void:
+	if not _dash_cooldown:
+		dash_duration_timer.start(0.15)
+		_is_dashing = true
+		_dash_cooldown = true
+		dash_cooldown_timer.start(0.6)	
+		print_debug("player is dashing")
+	else:
+		print_debug("player cant dash, because its on cooldown")
+
+
+func _on_dash_duration_timer_timeout() -> void:
+	_is_dashing = false
+	print("player stop dashing")
+
+
+func _on_dash_cool_down_timeout() -> void:
+	_dash_cooldown = false	

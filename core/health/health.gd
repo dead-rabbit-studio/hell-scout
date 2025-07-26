@@ -18,6 +18,7 @@ func heal(heal_points: float):
 		current = max_health
 	current += heal_points
 
+
 func damage(damage_points: float):
 	if is_alive:
 		var health_after_hit = current - damage_points
@@ -27,7 +28,9 @@ func damage(damage_points: float):
 	if current == 0 and !is_mortal:
 		kill()
 	
+
 func revive(): current = max_health
+
 
 func kill():
 	if is_alive:
