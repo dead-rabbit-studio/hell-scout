@@ -15,16 +15,13 @@ signal object_collected()
 @export var player_area: CollisionShape2D
 @export var health: Health
 @export var controller: Controller
-@export var dash_duration_timer: Timer
-@export var dash_cooldown_timer: Timer
+@export var dash_controller: DashController
 
 var _current_direction_vector: Vector2 = Vector2.ZERO 
 var _last_direction: Vector2 = Vector2.RIGHT
 
 var _melee_attack_scene = preload(R.scenes.melee_attack)
 var _current_melee_attack: Area2D = null
-var _is_dashing: bool = false
-var _dash_cooldown: bool = false
 
 
 func take_damage(damage: float):
@@ -62,8 +59,8 @@ func _move_player(direction: Vector2):
 
 	
 	var current_speed = 0
-	if _is_dashing:
-		current_speed = dash_speed
+	if dash_controller.is_dashing:
+		current_speed = dash_controller.dash_speed
 	else:
 		current_speed = speed
 
@@ -106,20 +103,4 @@ func _on_timer_timeout() -> void:
 
 
 func _on_controller_dash() -> void:
-	if not _dash_cooldown:
-		dash_duration_timer.start(0.15)
-		_is_dashing = true
-		_dash_cooldown = true
-		dash_cooldown_timer.start(0.6)	
-		print_debug("player is dashing")
-	else:
-		print_debug("player cant dash, because its on cooldown")
-
-
-func _on_dash_duration_timer_timeout() -> void:
-	_is_dashing = false
-	print("player stop dashing")
-
-
-func _on_dash_cool_down_timeout() -> void:
-	_dash_cooldown = false	
+	dash_controller.dash()

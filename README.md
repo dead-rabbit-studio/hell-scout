@@ -4,11 +4,11 @@ A 2D action game built with Godot Engine where you control a scout character exp
 
 ## Features
 
-- Smooth 2D movement and combat system
+- 2D movement and combat system
 - Melee and ranged combat mechanics
+- Dash
 - Interactive environment elements
 - Health and damage system
-- AI-controlled enemies
 - Collectible items
 
 ## Project Structure
