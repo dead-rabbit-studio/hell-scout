@@ -5,25 +5,30 @@ extends Node
 @export var cooldown:float = 0.6
 @export var dash_duration:float = 0.14
 
-@onready var dash_duration_timer: Timer = $DashDurationTimer
+@onready var dash_duration_timer: float = dash_duration
 
 var is_dashing: bool = false
+
 var _is_on_dash_cooldown: bool = false
 var _cooldown_timer: float = 0.0
 
 func _process(delta: float) -> void:
+	if dash_duration_timer > 0:
+		dash_duration_timer -= delta	
+	else:
+		is_dashing = false
+
 	_handle_cooldown_timer(delta)
 
 
 func dash() -> void:
 	if not _is_on_dash_cooldown:
-		dash_duration_timer.start(dash_duration)
+		dash_duration_timer = dash_duration
 		_cooldown_timer = cooldown
 		is_dashing = true
 		_is_on_dash_cooldown = true
-		print("player is dashing")
 	else:
-		print("player can´t dash, because its on cooldown")
+		print("player can`t dash, because its on cooldown")
 
 
 func _handle_cooldown_timer(delta: float) -> void:
