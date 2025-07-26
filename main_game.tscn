@@ -266,7 +266,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAE
 tile_set = SubResource("TileSet_qj47d")
 
 [node name="Player" parent="Level" instance=ExtResource("1_4phlm")]
-position = Vector2(657, 178)
+position = Vector2(270, 223)
 collision_mask = 3
 speed = 250.0
 

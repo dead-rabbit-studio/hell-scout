@@ -365,6 +365,9 @@ script = ExtResource("8_lldpg")
 autostart = true
 
 [node name="DashController" parent="." instance=ExtResource("9_kq2vb")]
+dash_speed = 1200.0
+cooldown = 0.6
+dash_duration = 0.14
 
 [connection signal="depleted" from="Health" to="." method="_on_health_depleted"]
 [connection signal="interacted" from="Interactor" to="." method="_on_interactor_interacted"]
