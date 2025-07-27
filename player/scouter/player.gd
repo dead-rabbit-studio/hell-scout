@@ -113,6 +113,10 @@ func _on_controller_dash() -> void:
 
 func _on_dash_state_changed(is_dashing: bool) -> void:
 	dash_state_changed.emit(is_dashing)
+	if is_dashing:
+		health.ignore_damage = true
+	else:
+		health.ignore_damage = false
 
 
 func _on_dash_attempt_blocked() -> void:
