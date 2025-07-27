@@ -254,6 +254,7 @@ level = NodePath("Level")
 player_hud = NodePath("GUI/PlayerHUD")
 
 [node name="Level" type="Node2D" parent="." node_paths=PackedStringArray("player", "mob_spawner")]
+position = Vector2(-1, 0)
 script = ExtResource("2_igq84")
 player = NodePath("Player")
 mob_spawner = NodePath("MobSpawner")
@@ -293,7 +294,7 @@ position = Vector2(291, 174)
 script = ExtResource("6_f0rfs")
 
 [node name="Interactable" type="Area2D" parent="Level/Tree"]
-position = Vector2(1, 0)
+position = Vector2(-1, 0)
 collision_layer = 0
 script = ExtResource("7_t4u6m")
 
@@ -332,15 +333,27 @@ position = Vector2(727, 140)
 [node name="GUI" type="CanvasLayer" parent="."]
 metadata/_edit_use_anchors_ = true
 
-[node name="PlayerHUD" type="MarginContainer" parent="GUI" node_paths=PackedStringArray("hp_label")]
+[node name="PlayerHUD" type="MarginContainer" parent="GUI" node_paths=PackedStringArray("hp_label", "dash_label", "warning_cooldown_timer")]
 offset_right = 85.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 16
 script = ExtResource("12_aomqu")
-hp_label = NodePath("HP")
+hp_label = NodePath("VBoxContainer/HP")
+dash_label = NodePath("VBoxContainer/DashLabel")
+warning_cooldown_timer = NodePath("VBoxContainer/DashWarningCoolDown")
 
-[node name="HP" type="Label" parent="GUI/PlayerHUD"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PlayerHUD"]
 layout_mode = 2
+
+[node name="HP" type="Label" parent="GUI/PlayerHUD/VBoxContainer"]
+layout_mode = 2
+text = "HP"
+
+[node name="DashLabel" type="Label" parent="GUI/PlayerHUD/VBoxContainer"]
+layout_mode = 2
+text = "DASH: !"
+
+[node name="DashWarningCoolDown" type="Timer" parent="GUI/PlayerHUD/VBoxContainer"]
 
 [node name="GameOverScreen" type="CenterContainer" parent="GUI"]
 anchors_preset = 8

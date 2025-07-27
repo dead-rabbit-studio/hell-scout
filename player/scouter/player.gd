@@ -1,11 +1,10 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(int)
+signal dash_state_changed(bool)
+signal dash_attempt_blocked()
 signal changed_direction(direction: Vector2)
 signal object_collected()
-
-@onready var animation_tree: AnimationTree = $AnimationTree
-@onready var interactor: Interactor = $Interactor
 
 @export var speed:float = 400.0
 @export var dash_speed:float  = 1200.0
@@ -23,6 +22,8 @@ var _last_direction: Vector2 = Vector2.RIGHT
 var _melee_attack_scene = preload(R.scenes.melee_attack)
 var _current_melee_attack: Area2D = null
 
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var interactor: Interactor = $Interactor
 
 func take_damage(damage: float):
 	health.damage(damage)
@@ -36,6 +37,11 @@ func die():
 		_current_melee_attack.queue_free()
 		_current_melee_attack = null
 	animation_tree.active = false
+
+
+func _enter_tree() -> void:
+	dash_controller.dash_state_changed.connect(_on_dash_state_changed)
+	dash_controller.dash_attempt_blocked.connect(_on_dash_attempt_blocked)
 
 
 func _ready() -> void : 
@@ -56,7 +62,6 @@ func _move_player(direction: Vector2):
 	if _current_direction_vector != _last_direction and _current_direction_vector != Vector2.ZERO:
 		_last_direction = _current_direction_vector
 		changed_direction.emit(_last_direction)
-
 	
 	var current_speed = 0
 	if dash_controller.is_dashing:
@@ -104,3 +109,11 @@ func _on_timer_timeout() -> void:
 
 func _on_controller_dash() -> void:
 	dash_controller.dash()
+
+
+func _on_dash_state_changed(is_dashing: bool) -> void:
+	dash_state_changed.emit(is_dashing)
+
+
+func _on_dash_attempt_blocked() -> void:
+	dash_attempt_blocked.emit()
