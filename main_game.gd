@@ -34,7 +34,6 @@ func _on_player_health_changed(current_hp: int) -> void:
 
 
 func _on_dash_state_changed(is_dashing: bool):
-	print("dash state changed")
 	player_hud.dash_state_changed(is_dashing)
 
 

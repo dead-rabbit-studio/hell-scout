@@ -8,5 +8,7 @@ dash_duration_timer = NodePath("DashDurationTimer")
 dash_cooldown_timer = NodePath("DashCooldownTimer")
 
 [node name="DashDurationTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
+one_shot = true

@@ -37,13 +37,13 @@ func _change_dash_state(is_available: bool):
 	dash_state_changed.emit(is_available)
 
 
+func _on_dash_duration_timer_timeout() -> void:
+	_change_dash_state(false)
+
+
 func _start_cooldown() -> void:
 	dash_cooldown_timer.start(cooldown)
 	_is_on_dash_cooldown = true
-
-
-func _on_dash_duration_timer_timeout() -> void:
-	_change_dash_state(false)
 
 
 func _on_dash_cooldowntimer_timeout() -> void:
