@@ -115,6 +115,7 @@ func _on_dash_state_changed(is_dashing: bool) -> void:
 	dash_state_changed.emit(is_dashing)
 	if is_dashing:
 		health.ignore_damage = true
+		remove_child(_current_melee_attack)
 	else:
 		health.ignore_damage = false
 
