@@ -24,7 +24,6 @@ func update_hp(current_hp: int):
 
 
 func dash_state_changed(is_dashing: bool):
-    print("dash state changed: ", is_dashing)
     if is_dashing:
         dash_label.text = dash_label_text
     else :

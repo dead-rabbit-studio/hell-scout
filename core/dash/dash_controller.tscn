@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ytlnlavpfsw1" path="res://player/scouter/dash_controller.gd" id="1_66t1s"]
 
-[node name="DashController" type="Node"]
+[node name="DashController" type="Node" node_paths=PackedStringArray("dash_duration_timer", "dash_cooldown_timer")]
 script = ExtResource("1_66t1s")
+dash_duration_timer = NodePath("DashDurationTimer")
+dash_cooldown_timer = NodePath("DashCooldownTimer")
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
