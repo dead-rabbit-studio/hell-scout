@@ -46,7 +46,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void : 
 	health.max_health = max_health
-	print_debug("current health" + str(health.current))
 	health_changed.emit(health.current)
 	health.is_mortal = is_imortal
 
@@ -81,30 +80,33 @@ func _on_interactor_interacted() -> void:
 	object_collected.emit()
 
 
+func _on_interactable_interaction_state_changed(is_interactable:bool) -> void:
+	if not dash_controller.is_dashing and _current_melee_attack:
+		interactor.is_enabled = is_interactable
+
+
+func _on_timer_timeout() -> void:
+	take_damage(1)
+
+
 func _on_controller_interact() -> void:
 	interactor.interact()
 
 
 func _on_controller_attacked(_is_attacking:bool) -> void:
-	if _is_attacking and is_alive:
-		if _current_melee_attack == null:
-			_current_melee_attack = _melee_attack_scene.instantiate()
-			add_child(_current_melee_attack)
-			_current_melee_attack.connect("tree_exiting", func(): _current_melee_attack = null)
-			_current_melee_attack._on_player_changed_direction(_last_direction)
-		_current_melee_attack.attack(_is_attacking)
+	if not dash_controller.is_dashing:
+		if _is_attacking and is_alive:
+			if _current_melee_attack == null:
+				_current_melee_attack = _melee_attack_scene.instantiate()
+				add_child(_current_melee_attack)
+				_current_melee_attack.connect("tree_exiting", func(): _current_melee_attack = null)
+				_current_melee_attack._on_player_changed_direction(_last_direction)
+			_current_melee_attack.attack(_is_attacking)
 
 
 func _on_controller_moved(direction:Vector2) -> void:
-	_move_player(direction)
-
-
-func _on_interactable_interaction_state_changed(is_interactable:bool) -> void:
-	interactor.is_enabled = is_interactable
-
-
-func _on_timer_timeout() -> void:
-	take_damage(1)
+	if not _current_melee_attack:
+		_move_player(direction)
 
 
 func _on_controller_dash() -> void:
@@ -115,7 +117,8 @@ func _on_dash_state_changed(is_dashing: bool) -> void:
 	dash_state_changed.emit(is_dashing)
 	if is_dashing:
 		health.ignore_damage = true
-		remove_child(_current_melee_attack)
+		if _current_melee_attack:
+			_current_melee_attack.cancel_attack()
 	else:
 		health.ignore_damage = false
 

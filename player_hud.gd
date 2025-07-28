@@ -14,7 +14,6 @@ const WARNING_DASH_COLOR: Color = Color(1, 0, 0)
 var dash_blocked_warning_cooldown_timer: float = .1
 var current_dash_color: Color = DEFAULT_DASH_COLOR
 
-
 func _enter_tree() -> void:
     warning_cooldown_timer.timeout.connect(_on_warning_cooldown_timer_timeout)
 
