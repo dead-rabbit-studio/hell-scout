@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbleicxos7fdn"]
+[gd_scene format=3 uid="uid://cbleicxos7fdn"]
 
 [ext_resource type="Script" uid="uid://ytlnlavpfsw1" path="res://player/scouter/dash_controller.gd" id="1_66t1s"]
 
-[node name="DashController" type="Node" node_paths=PackedStringArray("dash_duration_timer", "dash_cooldown_timer")]
+[node name="DashController" type="Node" unique_id=1471901774 node_paths=PackedStringArray("dash_duration_timer", "dash_cooldown_timer")]
 script = ExtResource("1_66t1s")
 dash_duration_timer = NodePath("DashDurationTimer")
 dash_cooldown_timer = NodePath("DashCooldownTimer")
 
-[node name="DashDurationTimer" type="Timer" parent="."]
+[node name="DashDurationTimer" type="Timer" parent="." unique_id=985111344]
 one_shot = true
 
-[node name="DashCooldownTimer" type="Timer" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="." unique_id=2045065698]
 one_shot = true
