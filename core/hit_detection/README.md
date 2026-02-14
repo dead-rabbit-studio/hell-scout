@@ -1,41 +1,8 @@
-# Hit Detection System
+# Hit Detection
 
-Implements combat hit detection through HitBox and HurtBox components.
+Area2D-based combat collision using HitBox/HurtBox pattern.
 
-## Components
+- `hit_box.gd` - Attach to things that deal damage
+- `hurt_box.gd` - Attach to things that take damage (supports i-frames)
 
-### HitBox
-- `hit_box.gd` - Offensive collision area
-- Manages damage dealing
-- Configurable damage values
-- Hit detection signals
-
-### HurtBox
-- `hurt_box.gd` - Vulnerable collision area
-- Manages damage receiving
-- Invincibility frame support
-- Damage type handling
-
-## Features
-
-### Hit Detection
-- Area2D-based collision detection
-- Layer-based filtering
-- Hit validation
-- Multiple hit handling
-
-### Integration
-- Health system integration
-- Combat system support
-- Visual effect triggers
-- Sound effect triggers
-
-## Usage
-
-### Setting Up Hit Detection
-
-1. Add HitBox to attacking entities
-2. Add HurtBox to vulnerable entities
-3. Configure collision layers
-4. Connect signals for custom behavior
-5. Set up damage values and types
+Uses collision layers to filter what can hit what.

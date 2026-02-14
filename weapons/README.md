@@ -1,39 +1,11 @@
 # Weapons
 
-Contains all weapon-related implementations and assets.
+Melee and ranged weapon implementations.
 
-## Components
+## Melee
+- `melee_attack.gd` / `melee_attack.tscn` - Direction-based melee with hit detection
+- `melee-attack-vfx.png` - Swing effect
 
-### Melee Attack System
-- `melee_attack.gd` - Melee attack implementation
-- `melee_attack.tscn` - Melee attack scene
-- `melee-attack-vfx.png` - Visual effects for melee attacks
-
-### Ranged Weapon System
-- `gun.gd` - Ranged weapon implementation
-- `gun.tscn` - Gun scene configuration
-- `bullet.gd` - Projectile implementation
-- `bullet.tscn` - Bullet scene configuration
-
-## Features
-
-### Melee Combat
-- Direction-based attack system
-- Hit detection integration
-- Visual effects system
-- Damage calculation
-
-### Ranged Combat
-- Projectile-based system
-- Direction-based shooting
-- Bullet physics integration
-- Range and damage configuration
-
-## Usage
-
-Weapons can be attached to both player and NPC entities through their respective scene trees. Each weapon type implements the following key features:
-
-- Damage calculation
-- Hit detection
-- Visual effects
-- Sound effects (where applicable)
+## Ranged
+- `gun.gd` / `gun.tscn` - Shoots bullets
+- `bullet.gd` / `bullet.tscn` - Projectile with physics and damage
