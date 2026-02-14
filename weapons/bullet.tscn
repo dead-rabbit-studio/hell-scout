@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dui5plxsf52a"]
+[gd_scene format=3 uid="uid://dui5plxsf52a"]
 
 [ext_resource type="Script" uid="uid://cv4ii4l7s13wt" path="res://weapons/bullet.gd" id="1_jfbtu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlx3j"]
 size = Vector2(5, 5)
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" unique_id=1911729377]
 script = ExtResource("1_jfbtu")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=505459997]
 offset_right = 5.0
 offset_bottom = 5.0
 color = Color(0.67451, 0.196078, 0.196078, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041354585]
 position = Vector2(2.5, 2.5)
 shape = SubResource("RectangleShape2D_jlx3j")
