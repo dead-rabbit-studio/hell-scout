@@ -33,6 +33,10 @@ window/stretch/aspect="keep_height"
 
 project/assembly_name="Hell Scout"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg")
+
 [input]
 
 move_up={
