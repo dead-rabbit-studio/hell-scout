@@ -5,10 +5,10 @@ extends Node
 
 @export var is_running = false
 
-var _animation_tree_parameter_idle_blend_position = "parameters/Idle/BlendSpace2D/blend_position"
-var _animation_tree_parameter_running_blend_position = "parameters/Running/BlendSpace2D/blend_position"
-var _animation_tree_parameter_is_running = "parameters/conditions/isEnabled"
-var _animation_tree_parameter_is_idle = "parameters/conditions/isIdle"
+const _IDLE_BLEND_POSITION = "parameters/Idle/BlendSpace2D/blend_position"
+const _RUNNING_BLEND_POSITION = "parameters/Running/BlendSpace2D/blend_position"
+const _IS_RUNNING = "parameters/conditions/isEnabled"
+const _IS_IDLE = "parameters/conditions/isIdle"
 
 func _ready() -> void:
 	pass
@@ -26,25 +26,22 @@ func _set_animation_tree_conditions(velocity: Vector2) -> void:
 	is_running = velocity != Vector2.ZERO
 	var is_idle = velocity == Vector2.ZERO
 
-	print_debug("is idle?" + str(is_idle))
-	print_debug("is running?" + str(is_running))
-
 	animation_tree.set(
-		_animation_tree_parameter_is_running, 
+		_IS_RUNNING, 
 		is_running,
 	)
 	
 	animation_tree.set(
-		_animation_tree_parameter_is_idle,
+		_IS_IDLE,
 		is_idle,
 	)
 
 func _animate(velocity: Vector2):
 	animation_tree.set(
-		_animation_tree_parameter_running_blend_position,
+		_RUNNING_BLEND_POSITION,
 		velocity,
 	)
 	animation_tree.set(
-		_animation_tree_parameter_idle_blend_position,
+		_IDLE_BLEND_POSITION,
 		velocity,
 	)

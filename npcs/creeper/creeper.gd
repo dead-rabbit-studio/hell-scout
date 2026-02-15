@@ -23,7 +23,6 @@ func take_damage(damage_taken: float):
 
 func die() -> void:
 	queue_free()
-	print_debug("a creeper has died")
 
 
 func _ready() -> void:
@@ -31,7 +30,6 @@ func _ready() -> void:
 	set_collision_mask_value(1, true)
 	health.current = max_health
 	detect_raycast.add_exception(self)
-	print_debug("new creeper health:" + str(health.current))
 	if health.is_alive:
 		line_of_sight_area.radius = line_of_sight_size
 
@@ -54,7 +52,6 @@ func _follow_player(delta: float) -> void:
 		
 		var movement: Vector2 = direction * (speed * delta)
 		
-		print_debug("Creeper: Player in line of sight" + str(_player_position) + " distance: " + str(distance_lenght))
 		if distance_lenght > personal_space_area:
 			move_and_collide(movement)		
 
@@ -68,9 +65,7 @@ func _detect_player(_delta: float):
 
 		if detect_raycast.is_colliding():
 			var collider = detect_raycast.get_collider()
-			print_debug("Raycast hit:", collider.name if collider else "none")
 			if collider and collider.is_in_group("Player"):
-				print_debug("player is on sight")
 				_player_los = true
 			else:
 				_player_los = false

@@ -8,9 +8,9 @@ signal object_collected()
 
 @export var speed:float = 400.0
 @export var dash_speed:float  = 1200.0
-@export var max_health:int = 110
+@export var max_health:int = 3
 @export var is_alive: bool = true
-@export var is_imortal: bool = true
+@export var is_immortal: bool = true
 @export var player_area: CollisionShape2D
 @export var health: Health
 @export var controller: Controller
@@ -47,13 +47,9 @@ func _enter_tree() -> void:
 func _ready() -> void : 
 	health.max_health = max_health
 	health_changed.emit(health.current)
-	health.is_mortal = is_imortal
+	health.is_mortal = not is_immortal
 
 
-func _process(_delta: float) -> void:
-	if !is_alive:
-		health.kill()
-	
 
 func _move_player(direction: Vector2):
 	_current_direction_vector = direction

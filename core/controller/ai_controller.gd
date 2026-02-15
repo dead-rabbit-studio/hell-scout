@@ -6,19 +6,14 @@ func _random_direction() -> Vector2:
 
 func _on_neural_network_action_required(action:String) -> void:
 	if is_enabled:
-			print("AI Controller choosed action: " + str(action))
 			match action:
 				R.player_actions.attack:
-					print("AI Controller attack")
 					attacked.emit(true)
 				R.player_actions.interact:
-					print("AI Controller interact")
 					interact.emit()
 				R.player_actions.dash:
-					print("AI Controller dash")
 					dash.emit()
 				action when action.contains("move"):
-					print("AI Controller moved")
 					moved.emit(_random_direction())
 				_:
-					print(action)
+					pass
